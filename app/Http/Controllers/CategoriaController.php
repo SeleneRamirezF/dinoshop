@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Categoria;
 use Illuminate\Http\Request;
+use App\Http\Requests\Categoria\StoreRequest;
+use App\Http\Requests\Categoria\UpdateRequest;
 
 class CategoriaController extends Controller
 {
@@ -14,8 +16,7 @@ class CategoriaController extends Controller
      */
     public function index()
     {
-        //metodo index
-        $categorias=Categoria::orderBy('nombre');
+        $categorias = Categoria::orderBy('nombre');
         return view('categorias.index', compact('categorias'));
     }
 
@@ -35,19 +36,21 @@ class CategoriaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-        $request->validate([
-            'nombre'=>['required'],
-            'desc'=>['required']
-        ]);
+        Categoria::create($request->all());
+        return redirect()->route('categorias.index');
+        // $request->validate([
+        //     'nombre'=>['required'],
+        //     'desc'=>['nullable']
+        // ]);
 
-        $categoria = new Categoria();
-        $categoria->nombre = strtoupper($request->nombre);
-        $categoria->desc = $request->desc;
-        //guardamos y regresamos al inicio
-        $categoria->save();
-        return redirect()->route('categorias.index')->with('mensaje', 'Categoria Creada');
+        // $categoria = new Categoria();
+        // $categoria->nombre = strtoupper($request->nombre);
+        // $categoria->desc = $request->desc;
+        // //guardamos y regresamos al inicio
+        // $categoria->save();
+        // return redirect()->route('categorias.index')->with('mensaje', 'Categoria Creada');
     }
 
     /**
@@ -79,18 +82,20 @@ class CategoriaController extends Controller
      * @param  \App\Models\Categoria  $categoria
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Categoria $categoria)
+    public function update(UpdateRequest $request, Categoria $categoria)
     {
-        $request->validate([
-            'nombre'=>['required'],
-            'desc'=>['required']
-        ]);
+        $categoria->update($request->all());
+        return redirect()->route('categorias.index');
+        // $request->validate([
+        //     'nombre'=>['required'],
+        //     'desc'=>['nullable']
+        // ]);
 
-        $categoria->update([
-            'nombre'=>strtoupper($request->nombre),
-            'desc'=>$request->desc
-        ]);
-        return redirect()->route('categorias.index')->with('mensaje', 'Categoria modificada correctamente');
+        // $categoria->update([
+        //     'nombre'=>strtoupper($request->nombre),
+        //     'desc'=>$request->desc
+        // ]);
+        // return redirect()->route('categorias.index')->with('mensaje', 'Categoria modificada correctamente');
     }
 
     /**
