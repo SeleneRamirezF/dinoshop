@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Pedido;
+use App\Models\Venta;
 use Illuminate\Http\Request;
-use App\Http\Requests\Pedido\StoreRequest;
-use App\Http\Requests\Pedido\UpdateRequest;
-use App\Models\Proveedor;
+use App\Http\Requests\Venta\StoreRequest;
+use App\Http\Requests\Venta\UpdateRequest;
+use App\Models\Cliente;
+use Facade\FlareClient\Http\Client;
 
-class PedidoController extends Controller
+class VentaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +18,8 @@ class PedidoController extends Controller
      */
     public function index()
     {
-        $pedidos = Pedido::orderBy('nombre');
-        return view('pedidos.index', compact('pedidos'));
+        $ventas = Venta::orderBy('nombre');
+        return view('ventas.index', compact('ventas'));
     }
 
     /**
@@ -28,8 +29,8 @@ class PedidoController extends Controller
      */
     public function create()
     {
-        $pedidos = Pedido::get();
-        return view('pedidos.create', compact('pedidos'));
+        $clientes = Cliente::get();
+        return view('ventas.create', compact('clientes'));
     }
 
     /**
@@ -38,9 +39,9 @@ class PedidoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreRequest $request)
+    public function store(Request $request)
     {
-        $pedido = Pedido::create($request->all());
+        $venta = Venta::create($request->all());
         //recorremos el array del pedido y creamos los detalle del pedido
         foreach($request->producto_id as $key => $producto){
             $resultado[] = array(
@@ -49,55 +50,53 @@ class PedidoController extends Controller
                 "precio"=>$request->precop[$key]
             );
         }
-        $pedido->detallePedido()->createMany($resultado);
-        return redirect()->route('pedidos.index');
+        $venta->detallesVenta()->createMany($resultado);
+        return redirect()->route('ventas.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Pedido  $pedido
+     * @param  \App\Models\Venta  $venta
      * @return \Illuminate\Http\Response
      */
-    public function show(Pedido $pedido)
+    public function show(Venta $venta)
     {
-        return view('pedidos.show', compact('pedido'));
+        return view('ventas.show', compact('venta'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Pedido  $pedido
+     * @param  \App\Models\Venta  $venta
      * @return \Illuminate\Http\Response
      */
-    public function edit(Pedido $pedido)
+    public function edit(Venta $venta)
     {
-        $proveedors = Proveedor::get();
-        return view('pedidos.edit', compact('proveedors'));
+        $clientes = Cliente::get();
+        return view('ventas.edit', compact('ventas'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Pedido  $pedido
+     * @param  \App\Models\Venta  $venta
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateRequest $request, Pedido $pedido)
+    public function update(Request $request, Venta $venta)
     {
-        // $pedido->update($request->all());
-        // return redirect()->route('pedidos.index');
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Pedido  $pedido
+     * @param  \App\Models\Venta  $venta
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Pedido $pedido)
+    public function destroy(Venta $venta)
     {
-        // $pedido->delete();
-        // return redirect()->route('pedidos.index')->with('mensaje', 'Pedido borrado correctamente');
+        //
     }
 }
