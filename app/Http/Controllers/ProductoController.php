@@ -30,8 +30,8 @@ class ProductoController extends Controller
     public function create()
     {
         $categorias = Categoria::orderBy('nombre')->get();
-        $proveedores = Proveedor::orderBy('nombre')->get();
-        return view('productos.create', compact('categorias', 'proveedores'));
+        $proveedors = Proveedor::orderBy('nombre')->get();
+        return view('productos.create', compact('categorias', 'proveedors'));
     }
 
     /**
@@ -66,8 +66,8 @@ class ProductoController extends Controller
     public function edit(Producto $producto)
     {
         $categorias = Categoria::orderBy('nombre')->get();
-        $proveedores = Proveedor::orderBy('nombre')->get();
-        return view('productos.edit', compact('producto', 'categorias', 'proveedores'));
+        $proveedors = Proveedor::orderBy('nombre')->get();
+        return view('productos.edit', compact('producto', 'categorias', 'proveedors'));
     }
 
     /**

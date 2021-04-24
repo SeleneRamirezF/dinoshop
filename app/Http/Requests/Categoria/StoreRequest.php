@@ -31,7 +31,7 @@ class StoreRequest extends FormRequest
     public function messages()
     {
         return[
-            'nombre.require' => 'Este campo es requerido',
+            'nombre.required' => 'Este campo es requerido',
             'nombre.string' => 'El valor tiene que ser una cadena de caracteres',
             'nombre.max' => 'El máximo de caracteres es 50',
             'desc.string' => 'El valor tiene que ser una cadena de caracteres',

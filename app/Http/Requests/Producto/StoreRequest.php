@@ -24,19 +24,18 @@ class StoreRequest extends FormRequest
     public function rules()
     {
         return [
-
             'nombre' => 'string|required|unique:productos|max:255',
             'descripcion' => 'required|string|max:255',
             'pvp' => 'required',
             'imagen' => 'required|dimensions:min_width=100,min_height=100',
             'categoria_id' => 'integer|required|exists:App\Categoria,id',
-            'proveedor_id' => 'integer|required|exists:App\Proveedor,id',
+            'proveedor_id' => 'integer|required|exists:App\Proveedor,id'
         ];
     }
     public function messages()
     {
         return[
-            'nombre.require' => 'Este campo es requerido',
+            'nombre.required' => 'Este campo es requerido',
             'nombre.string' => 'El valor tiene que ser una cadena de caracteres',
             'nombre.unique' => 'Este producto ya esta registrado',
             'nombre.max' => 'El máximo de caracteres es 255',

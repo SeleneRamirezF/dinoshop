@@ -24,6 +24,7 @@ class UpdateRequest extends FormRequest
     public function rules()
     {
         return [
+            //$this.... es para que no se busque a si mismo
             'nombre' => 'string|required|unique:productos,nombre,'. $this->route
             ('producto')->id.'|max:255',
 
@@ -37,7 +38,7 @@ class UpdateRequest extends FormRequest
     public function messages()
     {
         return[
-            'nombre.require' => 'Este campo es requerido',
+            'nombre.required' => 'Este campo es requerido',
             'nombre.string' => 'El valor tiene que ser una cadena de caracteres',
             'nombre.unique' => 'Este producto ya esta registrado',
             'nombre.max' => 'El máximo de caracteres es 255',

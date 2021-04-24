@@ -34,15 +34,15 @@ class StoreRequest extends FormRequest
     public function messages()
     {
         return[
-            'nombre.require' => 'Este campo es requerido',
+            'nombre.required' => 'Este campo es requerido',
             'nombre.string' => 'El valor tiene que ser una cadena de caracteres',
             'nombre.max' => 'El máximo de caracteres es 255',
 
-            'apellidos.require' => 'Este campo es requerido',
+            'apellidos.required' => 'Este campo es requerido',
             'apellidos.string' => 'El valor tiene que ser una cadena de caracteres',
             'apellidos.max' => 'El máximo de caracteres es 255',
 
-            'email.require' => 'Este campo es requerido',
+            'email.required' => 'Este campo es requerido',
             'email.email' => 'Este campo tiene que tener formato de email',
             'email.string' => 'El valor tiene que ser una cadena de caracteres',
             'email.max' => 'El máximo de caracteres es 255',
@@ -51,7 +51,7 @@ class StoreRequest extends FormRequest
             'direccion.string' => 'El valor tiene que ser una cadena de caracteres',
             'direccion.max' => 'El máximo de caracteres es 255',
 
-            'telefono.require' => 'Este campo es requerido',
+            'telefono.required' => 'Este campo es requerido',
             'telefono.string' => 'El valor tiene que ser una cadena de caracteres',
             'telefono.max' => 'El máximo es de 9 números',
             'telefono.min' => 'El mínimo es de 9 números',
