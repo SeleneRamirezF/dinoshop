@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Categoria;
-use Illuminate\Http\Request;
+//use Illuminate\Http\Request;
 use App\Http\Requests\Categoria\StoreRequest;
 use App\Http\Requests\Categoria\UpdateRequest;
 
@@ -40,17 +40,6 @@ class CategoriaController extends Controller
     {
         Categoria::create($request->all());
         return redirect()->route('categorias.index');
-        // $request->validate([
-        //     'nombre'=>['required'],
-        //     'desc'=>['nullable']
-        // ]);
-
-        // $categoria = new Categoria();
-        // $categoria->nombre = strtoupper($request->nombre);
-        // $categoria->desc = $request->desc;
-        // //guardamos y regresamos al inicio
-        // $categoria->save();
-        // return redirect()->route('categorias.index')->with('mensaje', 'Categoria Creada');
     }
 
     /**
@@ -86,16 +75,6 @@ class CategoriaController extends Controller
     {
         $categoria->update($request->all());
         return redirect()->route('categorias.index');
-        // $request->validate([
-        //     'nombre'=>['required'],
-        //     'desc'=>['nullable']
-        // ]);
-
-        // $categoria->update([
-        //     'nombre'=>strtoupper($request->nombre),
-        //     'desc'=>$request->desc
-        // ]);
-        // return redirect()->route('categorias.index')->with('mensaje', 'Categoria modificada correctamente');
     }
 
     /**

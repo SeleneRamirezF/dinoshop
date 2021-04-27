@@ -22,7 +22,13 @@ class ProductoFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'nombre'=>ucwords($this->faker->word()),
+            'descripcion'=>ucfirst($this->faker->text(250)),
+            'pvp'=>$this->faker->randomFloat($nbMaxDecimals = 2, $min = 0, $max = 500),
+            'stock'=>$this->faker->numberBetween($min=1, $max=100),
+            'imagen'=>$this->faker->imageUrl($width = 100, $height = 100), // 'http://lorempixel.com/640/480/'
+            'categoria_id'=>$this->faker->numberBetween($min=1, $max=9),
+            'proveedor_id'=>$this->faker->numberBetween($min=1, $max=5)
         ];
     }
 }
