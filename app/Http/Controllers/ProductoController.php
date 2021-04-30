@@ -11,6 +11,12 @@ use App\Models\Proveedor;
 
 class ProductoController extends Controller
 {
+    public function __construct(){
+        $this->middleware(
+            ['auth','verified'],
+            ['only'=>['edit', 'update', 'create', 'destroy', 'store' ]]
+        );
+    }
     /**
      * Display a listing of the resource.
      *
@@ -18,7 +24,7 @@ class ProductoController extends Controller
      */
     public function index()
     {
-        $productos = Producto::orderBy('nombre');
+        $productos = Producto::orderBy('nombre')->paginate(5);
         return view('productos.index', compact('productos'));
     }
 

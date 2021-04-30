@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\CategoriaController;
+use App\Http\Controllers\ProductoController;
+use App\Http\Controllers\ProveedorController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,6 +23,16 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+//----------------------------------------------------
+// Route::resource('categorias', [CategoriaController::class]);
+// Route::resource('proveedors', [ProveedorController::class]);
+Route::resource('productos', 'App\Http\Controllers\ProductoController');
+
+
+
+
+//-----------------------------------------------------
 
 require __DIR__.'/auth.php';
 
