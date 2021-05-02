@@ -9,6 +9,12 @@ use App\Http\Requests\Proveedor\UpdateRequest;
 
 class ProveedorController extends Controller
 {
+    public function __construct(){
+        $this->middleware(
+            ['auth','verified'],
+            ['only'=>['edit', 'update', 'create', 'destroy', 'store' ]]
+        );
+    }
     /**
      * Display a listing of the resource.
      *
@@ -16,8 +22,8 @@ class ProveedorController extends Controller
      */
     public function index()
     {
-        $proveedores = Proveedor::orderBy('nombre');
-        return view('proveedores.index', compact('proveedores'));
+        $proveedors = Proveedor::orderBy('nombre')->paginate(4);
+        return view('proveedors.index', compact('proveedors'));
     }
 
     /**
@@ -27,7 +33,7 @@ class ProveedorController extends Controller
      */
     public function create()
     {
-        return view('proveedores.create');
+        return view('proveedors.create');
     }
 
     /**
@@ -39,24 +45,7 @@ class ProveedorController extends Controller
     public function store(StoreRequest $request)
     {
         Proveedor::create($request->all());
-        return redirect()->route('proveedores.index');
-        // $request->validate([
-        //     'nombre'=>'required|string|max:255',
-        //     'apellidos'=>'required|string|max:255',
-        //     'email'=>'required|email|string|max:200|unique:proveedors',
-        //     'direccion'=>'nullable|string|max:255',
-        //     'telefono'=>'required|string|max:9|min:9',
-        // ]);
-
-        // $categoria = new Proveedor();
-        // $categoria->nombre = strtoupper($request->nombre);
-        // $categoria->apellidos = strtoupper($request->apellidos);
-        // $categoria->email = $request->email;
-        // $categoria->direccion = $request->direccion;
-        // $categoria->telefono = $request->telefono;
-        // //guardamos y regresamos al inicio
-        // $categoria->save();
-        // return redirect()->route('proveedores.index')->with('mensaje', 'Proveedor creado');
+        return redirect()->route('proveedors.index');
     }
 
     /**
@@ -65,10 +54,7 @@ class ProveedorController extends Controller
      * @param  \App\Models\Proveedor  $proveedor
      * @return \Illuminate\Http\Response
      */
-    public function show(Proveedor $proveedor)
-    {
-        return view('proveedores.show', compact('proveedor'));
-    }
+    public function show(Proveedor $proveedor){}
 
     /**
      * Show the form for editing the specified resource.
@@ -78,7 +64,7 @@ class ProveedorController extends Controller
      */
     public function edit(Proveedor $proveedor)
     {
-        return view('proveedores.edit', compact('proveedor'));
+        return view('proveedors.edit', compact('proveedor'));
     }
 
     /**
@@ -91,23 +77,7 @@ class ProveedorController extends Controller
     public function update(UpdateRequest $request, Proveedor $proveedor)
     {
         $proveedor->update($request->all());
-        return redirect()->route('proveedores.index');
-        // $request->validate([
-        //     'nombre'=>'required|string|max:255',
-        //     'apellidos'=>'required|string|max:255',
-        //     'email'=>'required|email|string|max:200|unique:proveedors',
-        //     'direccion'=>'nullable|string|max:255',
-        //     'telefono'=>'required|string|max:9|min:9',
-        // ]);
-
-        // $proveedor->update([
-        //     'nombre' => strtoupper($request->nombre),
-        //     'apellidos' => strtoupper($request->apellidos),
-        //     'email' => $request->email,
-        //     'direccion' => $request->direccion,
-        //     'telefono' => $request->telefono
-        // ]);
-        // return redirect()->route('proveedores.index')->with('mensaje', 'Proveedor modificado correctamente');
+        return redirect()->route('proveedors.index');
     }
 
     /**
@@ -119,6 +89,6 @@ class ProveedorController extends Controller
     public function destroy(Proveedor $proveedor)
     {
         $proveedor->delete();
-        return redirect()->route('proveedores.index')->with('mensaje', 'Proveedor borrado correctamente');
+        return redirect()->route('proveedors.index')->with('mensaje', 'Proveedor borrado correctamente');
     }
 }

@@ -8,6 +8,8 @@ use App\Http\Requests\Producto\StoreRequest;
 use App\Http\Requests\Producto\UpdateRequest;
 use App\Models\Categoria;
 use App\Models\Proveedor;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 class ProductoController extends Controller
 {
@@ -24,7 +26,7 @@ class ProductoController extends Controller
      */
     public function index()
     {
-        $productos = Producto::orderBy('nombre')->paginate(5);
+        $productos = Producto::orderBy('nombre')->paginate(3);
         return view('productos.index', compact('productos'));
     }
 
@@ -48,8 +50,33 @@ class ProductoController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        Producto::create($request->all());
-        return redirect()->route('productos.index');
+        $datos = $request->validated();
+        $producto = new Producto();
+        $producto->nombre=$datos['nombre'];
+        $producto->descripcion=$datos['descripcion'];
+        $producto->pvp=$datos['pvp'];
+        $producto->stock=$datos['stock'];
+        $producto->categoria_id=$datos['categoria_id'];
+        $producto->proveedor_id=$datos['proveedor_id'];
+
+        // if(is_uploaded_file($this->imagen)){
+        //     //nombre unico
+        //     $nombreI='img/productos'.uniqid()."_".$this->imagen->getClientOriginalName();
+        //     //lo guardamos en la carpeta que queremos
+        //     Storage::disk('public')->put($nombreI, File::get($this->imagen));
+        //     //creamos un campo nuevo en el request con el nombre del fichero
+        //     $this->merge(['nombre_imagen'=>"storage/$nombreI"]);
+        // }
+        //si existe el nombre de la foto lo guardo sino nulo
+        if(isset($datos['nombre_imagen'])){
+            $producto->imagen=$datos['nombre_imagen'];
+        }
+        try {
+            $producto->save();
+            return redirect()->route('productos.index');
+        } catch (\Exception $ex) {
+            return redirect()->route('productos.index')->with('error', 'No se puede crear el producto: ' . $ex->getMessage());;
+        }
     }
 
     /**
@@ -83,9 +110,22 @@ class ProductoController extends Controller
      * @param  \App\Models\Producto  $producto
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateRequest $request, Producto $producto)
+    public function update(StoreRequest $request, Producto $producto)
     {
-        $producto->update($request->all());
+        $datos = $request->validated();
+        $producto->nombre=$datos['nombre'];
+        $producto->descripcion=$datos['descripcion'];
+        $producto->pvp=$datos['pvp'];
+        $producto->stock=$datos['stock'];
+        $producto->categoria_id=$datos['categoria_id'];
+        $producto->proveedor_id=$datos['proveedor_id'];
+
+        if(isset($datos['nombre_imagen'])){
+            if(basename($producto->imagen)!='default.png') unlink($producto->imagen);
+            $producto->imagen=$datos['nombre_foto'];
+        }
+
+        $producto->update();
         return redirect()->route('productos.index');
     }
 

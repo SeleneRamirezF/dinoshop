@@ -1,108 +1,49 @@
-{{-- <x-app-layout>
+<x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ 'Gestion de Libros' }}
+            {{'CATEGORIAS'}}
         </h2>
     </x-slot>
 
-    <div class="container mx-auto p-2 w-4/5 mb-4">
-
-        {{-- Llamamos a la vista de los mensajes de alertas
+    <div class="container mt-3 mx-auto p-2 w-4/5">
         <x-mensajes-alertas />
+        <a href="{{route('categorias.create')}}"
+            class="bg-green-600 hover:bg-green-800 rounded text-white font-bold py-2 px-4 shadow">
+            <i class="fa fa-plus"></i> Nueva Categoria</a>
 
-        <div class="py-3 text-right">
-            <form action="{{ route('libros.index') }}" name="search">
-                <i class="fas fa-search"></i>
-                <span class="font-bold mx-2"> Tema: </span>
-                <select name="tema" class="form-select mx-2" onchange="this.form.submit()">
-                    <option value="%">Todos</option>
-                    @foreach ($temas as $item)
-                        @if ($request->tema == $item->id)
-                            <option value="{{ $item->id }}" selected>{{ $item->nombre }}</option>
-                        @else
-                            <option value="{{ $item->id }}">{{ $item->nombre }}</option>
-                        @endif
-                    @endforeach
-                </select>
-
-                <span class="font-bold mx-2"> Stock: </span>
-                <select name="stock" class="form-select mx-2" onchange="this.form.submit()">
-                    <option value="%">Cualquiera</option>
-
-                    @if ($request->stock==1)
-                        <option value="1" selected>De 0 a 10</option>
-                    @else
-                        <option value="1">De 0 a 10</option>
-                    @endif
-
-                    @if ($request->stock==2)
-                        <option value="2" selected>De 10 a 50</option>
-                    @else
-                        <option value="2">De 10 a 50</option>
-                    @endif
-
-                    @if ($request->stock==3)
-                        <option value="3" selected>Mas de 50</option>
-                    @else
-                        <option value="3">Mas de 50</option>
-                    @endif
-
-                </select>
-            </form>
+        <div class="text-center grid grid-cols-3 py-2 gap-2 mt-10 border-2 border-blue-200 shadow text-xm">
+            <div class="font-bold text-gray-700">Nombre</div>
+            <div class="font-bold text-gray-700">Descripción</div>
+            <div class="font-bold text-gray-700">Acciones</div>
         </div>
-
-
-        <a href="{{ route('libros.create') }}"
-            class="my-8 bg-green-600 hover:bg-green-800 rounded text-white font-bold py-2 px-4 shadow text-xs mt-5">
-            <i class="fa fa-plus"></i> Nuevo libro</a>
-        <div class="text-center">
-        <table border="3">
-            <thead class="font-bold bg-gray-100">
-                <tr>
-                    <th class="p-2">Detalles</th>
-                    <th class="p-2">Titulo</th>
-                    <th class="p-2">Tema</th>
-                    <th class="p-2">Stock</th>
-                    <th class="p-2">Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($libros as $item)
-                    <tr class="my-2 p-8">
-                        <td class="p-2">
-                            <a href="{{ route('libros.show', $item) }}"
-                                class="my-8 bg-indigo-600 hover:bg-indigo-800 rounded text-white font-bold py-2 px-4 shadow text-xs mt-5">
-                                <i class="fa fa-info-circle"></i> Detalles</a>
-                        </td>
-                        <td class="p-2">{{ $item->titulo }}</td>
-                        <td class="p-2">{{ $item->tema->nombre }}</td>
-                        <td class="p-2">{{ $item->stock }}</td>
-                        <td class="p-2">
-                            <form name="a" action="{{ route('libros.destroy', $item) }}" method="post">
-                                @csrf
-                                @method('DELETE')
-                                <a href="{{ route('libros.edit', $item) }}"
-                                    class="my-8 bg-yellow-600 hover:bg-yellow-800 rounded text-white font-bold py-2 px-4 shadow text-xs mt-5">
-                                    <i class="fa fa-edit"></i> Editar</a>
-
-                                <button type="submit"
-                                    class="my-8 bg-red-600 hover:bg-red-800 rounded text-white font-bold py-2 px-4 shadow text-xs">
-                                    <i class="fa fa-trash"></i> Borrar
-                                </button>
-
-                            </form>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
+        <div class="text-center grid grid-cols-3 py-2 gap-2 mt-10 border-2 border-blue-200 shadow py-5 text-xs">
+            @foreach($categorias as $item)
+            <div>
+                {{$item->nombre}}
+            </div>
+            <div>
+                {{$item->descripcion}}
+            </div>
+            <div>
+                <form action="{{route('categorias.destroy', $item)}}" method="POST">
+                    @csrf
+                    @method("DELETE")
+                    <a href="{{route('categorias.edit', $item)}}"
+                        class="mx-3 bg-red-400 hover:bg-red-800 rounded text-white font-bold py-2 px-4 shadow">
+                        <i class="fa fa-edit"></i> Editar
+                    </a>
+                    <button type="submit"
+                        class="mx-3 bg-yellow-700 hover:bg-yellow-800 rounded text-white font-bold py-2 px-4 shadow"
+                        onclick="return confirm('¿Seguro que desea Borrar la Categoría: {{ $item->nombre }} ?')">
+                        <i class="fas fa-trash"></i> Borrar
+                    </button>
+                </form>
+            </div>
+            @endforeach
         </div>
-        <div class="mt-2">
-            {{ $libros->appends($request->except('page'))->links() }}
+        <div class="mt-4">
+            {{$categorias->links()}}
         </div>
-
     </div>
 
-
-</x-app-layout> --}}
-
+</x-app-layout>

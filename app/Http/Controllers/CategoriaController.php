@@ -9,6 +9,12 @@ use App\Http\Requests\Categoria\UpdateRequest;
 
 class CategoriaController extends Controller
 {
+    public function __construct(){
+        $this->middleware(
+            ['auth','verified'],
+            ['only'=>['edit', 'update', 'create', 'destroy', 'store' ]]
+        );
+    }
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +22,7 @@ class CategoriaController extends Controller
      */
     public function index()
     {
-        $categorias = Categoria::orderBy('nombre');
+        $categorias = Categoria::orderBy('nombre')->paginate(6);
         return view('categorias.index', compact('categorias'));
     }
 
@@ -48,10 +54,7 @@ class CategoriaController extends Controller
      * @param  \App\Models\Categoria  $categoria
      * @return \Illuminate\Http\Response
      */
-    public function show(Categoria $categoria)
-    {
-        return view('categorias.show', compact('categoria'));
-    }
+    public function show(Categoria $categoria){}
 
     /**
      * Show the form for editing the specified resource.

@@ -25,8 +25,8 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 //----------------------------------------------------
-// Route::resource('categorias', [CategoriaController::class]);
-// Route::resource('proveedors', [ProveedorController::class]);
+Route::resource('categorias', 'App\Http\Controllers\CategoriaController');
+Route::resource('proveedors', 'App\Http\Controllers\ProveedorController');
 Route::resource('productos', 'App\Http\Controllers\ProductoController');
 
 

@@ -14,7 +14,7 @@ class CreateProductosTable extends Migration
             $table->string('descripcion');
             $table->decimal('pvp', 7, 2);
             $table->integer('stock');
-            $table->string('imagen');
+            $table->string('imagen')->default('/storage/img/productos/default.png');;
 
             $table->unsignedBigInteger('categoria_id');
             $table->foreign('categoria_id')->references('id')->on('categorias');
