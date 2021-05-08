@@ -54,7 +54,7 @@
                             <th class="font-semibold text-sm uppercase px-6 py-4">
                                 Producto
                             </th>
-                            <th class="font-semibold text-sm uppercase px-6 py-4">
+                            <th class="font-semibold text-sm uppercase px-6 py-4 text-center">
                                 Precio(€)
                             </th>
                             <th class="font-semibold text-sm uppercase px-6 py-4 text-center">

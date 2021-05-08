@@ -32,10 +32,7 @@ function agregar() {
         evaluar();
         $('#detalles').append(fila);
     } else {
-        Swal.fire({
-            type: 'error',
-            text: 'Rellene todos los campos del detalle de la compras',
-        })
+        alert('Error:\nRellene todos los campos del detalle de la compras')
     }
 }
 
