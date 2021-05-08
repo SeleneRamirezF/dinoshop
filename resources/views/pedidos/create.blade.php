@@ -15,7 +15,7 @@
             @csrf
             <label class="block mt-4">
                 <span class="text-gray-700">Proveedor</span>
-                <select class="form-select mt-1 block w-full" name="proveedor"  id="provider_id">
+                <select class="form-select mt-1 block w-full" name="proveedor_id"  id="provider_id">
                   @foreach ($proveedors as $item)
                       <option value="{{$item->id}}">{{$item->nombre}}</option>
                   @endforeach
@@ -31,14 +31,14 @@
             </label>
             <label class="block mt-4">
                 <span class="text-gray-700">Producto</span>
-                <select class="form-select mt-1 block w-full" name="productos" id="product_id">
-                  @foreach ($productos as $itemP)
-                      <option value="{{$itemP->id}}">{{$itemP->nombre}}</option>
+                <select class="form-select mt-1 block w-full" name="producto_id" id="product_id">
+                  @foreach ($productos as $producto)
+                      <option value="{{$producto->id}}">{{$producto->nombre}}</option>
                   @endforeach
                 </select>
             </label>
             <x-form-input name="cantidad" id="quantity" label="Cantidad de producto" placeholder="Cantidad" type="number" step='1' min='0'/>
-            <x-form-input name="pvp" id="price" placeholder="{{$itemP->pvp}}" label="Precio compra (€)" type="number" step='0.01' min='0'/>
+            <x-form-input name="pvp" id="price" label="Precio compra (€)" type="number" step='0.01' min='0'/>
 
             <div class="my-4">
                 <button id="agregar" class="bg-green-600 hover:bg-green-800 rounded text-white font-bold py-2 px-4 shadow">
