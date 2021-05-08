@@ -24,6 +24,12 @@
                     <x-nav-link :href="route('productos.index')" :active="request()->routeIs('productos.index')">
                         {{'Gestionar Productos'}}
                     </x-nav-link>
+                    <x-nav-link :href="route('clientes.index')" :active="request()->routeIs('clientes.index')">
+                        {{'Gestionar Clientes'}}
+                    </x-nav-link>
+                    <x-nav-link :href="route('pedidos.index')" :active="request()->routeIs('pedidos.index')">
+                        {{'Gestionar Pedidos'}}
+                    </x-nav-link>
                 </div>
             </div>
 

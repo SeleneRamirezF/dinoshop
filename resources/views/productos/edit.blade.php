@@ -9,7 +9,7 @@
 
         <x-mensajes-alertas />
 
-        <form name="create" method="POST" action="{{ route('productos.update', $producto) }}">
+        <form name="create" method="POST" action="{{ route('productos.update', $producto) }}" enctype="multipart/form-data">
             @csrf
             @method("PUT")
             @bind($producto)

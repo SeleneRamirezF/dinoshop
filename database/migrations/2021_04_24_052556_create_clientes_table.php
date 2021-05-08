@@ -13,8 +13,9 @@ class CreateClientesTable extends Migration
             $table->string('nombre');
             $table->string('dni')->unique();
             $table->string('direccion')->nullable();
-            $table->string('telefono')->unique();
+            $table->string('telefono')->nullable()->unique();
             $table->string('email')->nullable()->unique();
+            $table->string('imagen')->default('/storage/img/clientes/default.jpg');
             $table->timestamps();
         });
     }

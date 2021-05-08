@@ -6,20 +6,31 @@ use App\Models\Pedido;
 use Illuminate\Http\Request;
 use App\Http\Requests\Pedido\StoreRequest;
 use App\Http\Requests\Pedido\UpdateRequest;
+use App\Models\Producto;
 use App\Models\Proveedor;
+use App\Models\User;
 
 class PedidoController extends Controller
 {
+    public function __construct(){
+        $this->middleware(
+            ['auth','verified'],
+            ['only'=>['edit', 'update', 'create', 'destroy', 'store' ]]
+        );
+    }
     public function index()
     {
-        $pedidos = Pedido::orderBy('nombre');
+        $pedidos = Pedido::orderBy('nombre')->paginate(5);
         return view('pedidos.index', compact('pedidos'));
     }
 
     public function create()
     {
-        $pedidos = Pedido::get();
-        return view('pedidos.create', compact('pedidos'));
+        $usuarios = User::orderBy('name')->get();
+        $proveedors = Proveedor::orderBy('nombre')->get();
+        $productos = Producto::orderBy('nombre')->get();
+        //$pedidos = Pedido::get();
+        return view('pedidos.create', compact('usuarios', 'proveedors', 'productos'));
     }
 
     public function store(StoreRequest $request)

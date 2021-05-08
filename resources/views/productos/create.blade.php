@@ -9,7 +9,7 @@
 
         <x-mensajes-alertas />
 
-        <form name="create" method="POST" action="{{ route('productos.store') }}">
+        <form name="create" method="POST" action="{{ route('productos.store') }}" enctype="multipart/form-data">
             @csrf
             <x-form-input name="nombre" label="Nombre producto" placeholder="Nombre"/>
             <x-form-textarea name="descripcion" label="Descripción producto" placeholder="Descripción"/>

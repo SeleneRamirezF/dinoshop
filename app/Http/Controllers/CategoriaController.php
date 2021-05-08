@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Categoria;
 //use Illuminate\Http\Request;
-use App\Http\Requests\Categoria\StoreRequest;
-use App\Http\Requests\Categoria\UpdateRequest;
+use App\Http\Requests\Categoria\CategoriaRequest;
 
 class CategoriaController extends Controller
 {
@@ -42,7 +41,7 @@ class CategoriaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreRequest $request)
+    public function store(CategoriaRequest $request)
     {
         Categoria::create($request->all());
         return redirect()->route('categorias.index');
@@ -74,7 +73,7 @@ class CategoriaController extends Controller
      * @param  \App\Models\Categoria  $categoria
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateRequest $request, Categoria $categoria)
+    public function update(CategoriaRequest $request, Categoria $categoria)
     {
         $categoria->update($request->all());
         return redirect()->route('categorias.index');

@@ -9,6 +9,12 @@ use App\Http\Requests\Cliente\UpdateRequest;
 
 class ClienteController extends Controller
 {
+    public function __construct(){
+        $this->middleware(
+            ['auth','verified'],
+            ['only'=>['edit', 'update', 'create', 'destroy', 'store' ]]
+        );
+    }
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +22,7 @@ class ClienteController extends Controller
      */
     public function index()
     {
-        $clientes = Cliente::orderBy('nombre');
+        $clientes = Cliente::orderBy('nombre')->paginate(5);
         return view('clientes.index', compact('clientes'));
     }
 
@@ -38,9 +44,23 @@ class ClienteController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        Cliente::create($request->all());
-        return redirect()->route('clientes.index');
+        $datos = $request->validated();
+        $cliente = new Cliente();
+        $cliente->nombre=$datos['nombre'];
+        $cliente->dni=$datos['dni'];
+        $cliente->direccion=$datos['direccion'];
+        $cliente->telefono=$datos['telefono'];
+        $cliente->email=$datos['email'];
 
+        if(isset($datos['nombre_imagen'])){
+            $cliente->imagen=$datos['nombre_imagen'];
+        }
+        try {
+            $cliente->save();
+            return redirect()->route('clientes.index');
+        } catch (\Exception $ex) {
+            return redirect()->route('clientes.index')->with('error', 'No se puede crear el cliente: ' . $ex->getMessage());
+        }
     }
 
     /**
@@ -76,9 +96,23 @@ class ClienteController extends Controller
      */
     public function update(UpdateRequest $request, Cliente $cliente)
     {
-        $cliente->update($request->all());
-        return redirect()->route('clientes.index');
+        $datos = $request->validated();
+        $cliente->nombre=$datos['nombre'];
+        $cliente->dni=$datos['dni'];
+        $cliente->direccion=$datos['direccion'];
+        $cliente->telefono=$datos['telefono'];
+        $cliente->email=$datos['email'];
 
+        if(isset($datos['nombre_imagen'])){
+            if(basename($cliente->imagen)!='default.png') unlink($cliente->imagen);
+            $cliente->imagen=$datos['nombre_imagen'];
+        }
+        try {
+            $cliente->update();
+            return redirect()->route('clientes.index');
+        } catch (\Exception $ex) {
+            return redirect()->route('clientes.index')->with('error', 'No se puede actualizar el cliente: ' . $ex->getMessage());
+        }
     }
 
     /**
@@ -89,8 +123,11 @@ class ClienteController extends Controller
      */
     public function destroy(Cliente $cliente)
     {
-        $cliente->delete();
-        return redirect()->route('clientes.index')->with('mensaje', 'Cliente borrado correctamente');
-
+        try{
+            $cliente->delete();
+            return redirect()->route('clientes.index')->with('mensaje', 'Cliente borrado correctamente');
+        }catch (\Exception $ex) {
+            return redirect()->route('clientes.index')->with('error', 'No se ha podido borrar el cliente: '. $ex->getMessage());
+        }
     }
 }

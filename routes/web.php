@@ -28,8 +28,8 @@ Route::get('/dashboard', function () {
 Route::resource('categorias', 'App\Http\Controllers\CategoriaController');
 Route::resource('proveedors', 'App\Http\Controllers\ProveedorController');
 Route::resource('productos', 'App\Http\Controllers\ProductoController');
-
-
+Route::resource('clientes', 'App\Http\Controllers\ClienteController');
+Route::resource('pedidos', 'App\Http\Controllers\PedidoController');
 
 
 //-----------------------------------------------------
