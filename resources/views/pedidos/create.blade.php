@@ -32,13 +32,13 @@
             <label class="block mt-4">
                 <span class="text-gray-700">Producto</span>
                 <select class="form-select mt-1 block w-full" name="productos" id="product_id">
-                  @foreach ($productos as $item)
-                      <option value="{{$item->id}}">{{$item->nombre}}</option>
+                  @foreach ($productos as $itemP)
+                      <option value="{{$itemP->id}}">{{$itemP->nombre}}</option>
                   @endforeach
                 </select>
             </label>
             <x-form-input name="cantidad" id="quantity" label="Cantidad de producto" placeholder="Cantidad" type="number" step='1' min='0'/>
-            <x-form-input name="pvp" id="price" label="Precio compra (€)" type="number" step='0.01' min='0'/>
+            <x-form-input name="pvp" id="price" placeholder="{{$itemP->pvp}}" label="Precio compra (€)" type="number" step='0.01' min='0'/>
 
             <div class="my-4">
                 <button id="agregar" class="bg-green-600 hover:bg-green-800 rounded text-white font-bold py-2 px-4 shadow">

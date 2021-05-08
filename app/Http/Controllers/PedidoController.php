@@ -9,6 +9,8 @@ use App\Http\Requests\Pedido\UpdateRequest;
 use App\Models\Producto;
 use App\Models\Proveedor;
 use App\Models\User;
+use App\Http\Controllers\Auth;
+
 
 class PedidoController extends Controller
 {
@@ -35,7 +37,9 @@ class PedidoController extends Controller
 
     public function store(StoreRequest $request)
     {
-        $pedido = Pedido::create($request->all());
+        $pedido = Pedido::create($request->all()+[
+            'user_id'=>Auth::user()->id
+        ]);
         //recorremos el array del pedido y creamos los detalle del pedido
         foreach($request->producto_id as $key => $producto){
             $resultado[] = array(

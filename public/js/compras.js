@@ -3,6 +3,12 @@ $(document).ready(function () {
     $("#agregar").click(function () {
         agregar();
     });
+
+    //var a = $("#product_id option:selected" ).text();
+    // $('#product_id').on('change', function() {
+    //    // $('#price').val("{{$itemP->pvp}}");
+    //     $("#price").attr("placeholder",'{{$itemP->pvp}}');
+    // });
 });
 let cont = 0;
 let total = 0;

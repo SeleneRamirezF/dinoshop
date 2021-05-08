@@ -1,20 +1,13 @@
-window.onload = iniciar;
 
-function iniciar(){
-
-    $(document).ready(function () {
-        $("#agregar").click(function () {
-            agregar();
-        });
+$(document).ready(function () {
+    $("#agregar").click(function () {
+        agregar();
     });
-
-    let cont = 0;
-    let total = 0;
-    let subtotal = [];
-
-    // $("#guardar").hide();
-
-}
+});
+let cont = 0;
+let total = 0;
+let subtotal = [];
+// $("#guardar").hide();
 
 function agregar() {
 
@@ -32,10 +25,7 @@ function agregar() {
         evaluar();
         $('#detalles').append(fila);
     } else {
-        Swal.fire({
-            type: 'error',
-            text: 'Rellene todos los campos del detalle de la compras',
-        })
+        alert('Error:\nRellene todos los campos del detalle de la compras')
     }
 }
 
