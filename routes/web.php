@@ -1,8 +1,5 @@
 <?php
 
-use App\Http\Controllers\CategoriaController;
-use App\Http\Controllers\ProductoController;
-use App\Http\Controllers\ProveedorController;
 use Illuminate\Support\Facades\Route;
 
 /*

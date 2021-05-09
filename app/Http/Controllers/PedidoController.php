@@ -29,11 +29,11 @@ class PedidoController extends Controller
 
     public function create()
     {
-        $usuarios = User::orderBy('name')->get();
+        //$usuarios = User::orderBy('name')->get();
         $proveedors = Proveedor::orderBy('nombre')->get();
         $productos = Producto::orderBy('nombre')->get();
         //$pedidos = Pedido::get();
-        return view('pedidos.create', compact('usuarios', 'proveedors', 'productos'));
+        return view('pedidos.create', compact('proveedors', 'productos'));
     }
 
     public function store(StoreRequest $request)
@@ -47,7 +47,7 @@ class PedidoController extends Controller
             $resultado[] = array(
                 "producto_id"=>$request->producto_id[$key],
                 "cantidad"=>$request->cantidad[$key],
-                "precio"=>$request->precop[$key]
+                "precio"=>$request->precio[$key]
             );
         }
         $pedido->detallePedido()->createMany($resultado);
@@ -56,13 +56,18 @@ class PedidoController extends Controller
 
     public function show(Pedido $pedido)
     {
+        $subtotal = 0 ;
+        $detallesPedido = $pedido->detallesPedido;
+        foreach ($detallesPedido as $detallePedido) {
+            $subtotal += $detallePedido->cantidad * $detallePedido->precio;
+        }
         return view('pedidos.show', compact('pedido'));
     }
 
     public function edit(Pedido $pedido)
     {
-        $proveedors = Proveedor::get();
-        return view('pedidos.edit', compact('proveedors'));
+        //$proveedors = Proveedor::get();
+        //return view('pedidos.edit', compact('proveedors'));
     }
 
     public function update(UpdateRequest $request, Pedido $pedido)
@@ -73,7 +78,17 @@ class PedidoController extends Controller
     public function destroy(Pedido $pedido)
     {
         //provisional
-        $pedido->delete();
-        return redirect()->route('pedidos.index')->with('mensaje', 'Pedido borrado correctamente');
+        //$pedido->delete();
+        //return redirect()->route('pedidos.index')->with('mensaje', 'Pedido borrado correctamente');
+    }
+    public function cambiarEstado(Pedido $pedido)
+    {
+        if ($pedido->status == 'VALIDO') {
+            $pedido->update(['estado'=>'CANCELADO']);
+            return redirect()->back();
+        } else {
+            $pedido->update(['estado'=>'VALIDO']);
+            return redirect()->back();
+        }
     }
 }

@@ -10,8 +10,7 @@
             class="bg-green-600 hover:bg-green-800 rounded text-white font-bold py-2 px-4 shadow">
             <i class="fa fa-plus"></i> Nuevo Proveedor</a>
 
-        <div class="text-center grid grid-cols-7 py-2 gap-2 mt-10 border-2 border-blue-200 shadow text-xm">
-            <div class="font-bold text-gray-700">Detalle</div>
+        <div class="text-center grid grid-cols-6 py-2 gap-2 mt-10 border-2 border-blue-200 shadow text-xm">
             <div class="font-bold text-gray-700">Nombre</div>
             <div class="font-bold text-gray-700">Apellidos</div>
             <div class="font-bold text-gray-700">Email</div>
@@ -19,13 +18,8 @@
             <div class="font-bold text-gray-700">Teléfono</div>
             <div class="font-bold text-gray-700">Acciones</div>
         </div>
-        <div class="text-center grid grid-cols-7 py-2 gap-2 mt-10 border-2 border-blue-200 shadow py-5 text-xs">
+        <div class="text-center grid grid-cols-6 py-2 gap-2 mt-10 border-2 border-blue-200 shadow py-5 text-xs">
             @foreach($proveedors as $item)
-            <div class="mb-5">
-                <a href="{{route('proveedors.show', $item)}}"
-                    class="bg-purple-400 hover:bg-green-200 rounded text-white font-bold py-2 px-4 shadow">
-                    <i class="fa fa-info"></i> Detalle</a>
-            </div>
             <div>
                 {{$item->nombre}}
             </div>
