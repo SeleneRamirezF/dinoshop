@@ -11,7 +11,7 @@ class CreatePedidosTable extends Migration
         Schema::create('pedidos', function (Blueprint $table) {
             $table->id();
 
-            $table->unsignedBigInteger('proveedor_id')->nullable();
+            $table->unsignedBigInteger('proveedor_id')->default(5);
             $table->foreign('proveedor_id')->references('id')->on('proveedors');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');

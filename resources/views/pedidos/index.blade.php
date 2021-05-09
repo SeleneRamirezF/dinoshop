@@ -21,30 +21,36 @@
         </div>
         <div class="text-center grid grid-cols-6 py-2 gap-2 mt-10 border-2 border-blue-200 shadow py-5 text-xs">
             @foreach($pedidos as $item)
+            <div class="mb-5">
+                <a href="{{route('pedidos.show', $item)}}"
+                    class="bg-purple-400 hover:bg-green-200 rounded text-white font-bold py-2 px-4 shadow">
+                    <i class="fa fa-info"></i> Detalle</a>
+            </div>
             <div>
                 {{$item->id}}
             </div>
             <div>
-                {{$item->proveedor->nombre}}
+                {{$item->proveedor_id}}
             </div>
             <div>
-                {{$item->usuario->nombre}}
+                {{$item->user->name}}
             </div>
             <div>
                 {{$item->estado}}
             </div>
             <div>
-                <form action="{{route('#', $item)}}" method="POST">
-                    {{-- pedidos.destroy --}}
+                {{-- proveedor_id', 'user_id', 'fecha', 'total', 'estado']; --}}
+                <form action="{{route('pedidos.destroy', $item)}}" method="POST">
+
                     @csrf
                     @method("DELETE")
-                    {{-- pedidos.edit --}}
-                    <a href="{{route('#', $item)}}"
-                        class="mx-3 bg-red-400 hover:bg-red-800 rounded text-white font-bold py-2 px-4 shadow">
+
+                    <a href="{{route('pedidos.edit', $item)}}"
+                        class="my-1 mx-1 bg-red-400 hover:bg-red-800 rounded text-white font-bold py-2 px-4 shadow">
                         <i class="fa fa-edit"></i> Editar
                     </a>
                     <button type="submit"
-                        class="mx-3 bg-yellow-700 hover:bg-yellow-800 rounded text-white font-bold py-2 px-4 shadow"
+                        class="my-1 mx-1 bg-yellow-700 hover:bg-yellow-800 rounded text-white font-bold py-2 px-4 shadow"
                         onclick="return confirm('¿Seguro que desea Borrar la pedido: {{ $item->id }} ?')">
                         <i class="fas fa-trash"></i> Borrar
                     </button>
@@ -53,7 +59,7 @@
             @endforeach
         </div>
         <div class="mt-4">
-            {{$pedidos->links()}}
+            {{-- {{$pedidos->links()}} --}}
         </div>
     </div>
 

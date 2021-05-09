@@ -23,7 +23,7 @@ class PedidoController extends Controller
     }
     public function index()
     {
-        $pedidos = Pedido::orderBy('nombre')->paginate(5);
+        $pedidos = Pedido::get();
         return view('pedidos.index', compact('pedidos'));
     }
 
@@ -72,6 +72,8 @@ class PedidoController extends Controller
 
     public function destroy(Pedido $pedido)
     {
-        //
+        //provisional
+        $pedido->delete();
+        return redirect()->route('pedidos.index')->with('mensaje', 'Pedido borrado correctamente');
     }
 }
