@@ -9,19 +9,20 @@ let subtotal = [];
 
 function agregar() {
 
-    product_id = $("#product_id").val();
-    producto = $("#product_id option:selected").text();
-    quantity = $("#quantity").val();
-    price = $("#price").val();
-  if (product_id != "" && quantity != "" && quantity > 0 && price != "") {
-        subtotal[cont] = quantity * price;
+    let producto_id = $("#producto_id").val();
+    let producto = $("#producto_id option:selected").text();
+    let cantidad = $("#cantidad").val();
+    let pvp = $("#pvp").val();
+
+  if (producto_id != "" && cantidad != "" && cantidad > 0 && pvp != "") {
+        subtotal[cont] = cantidad * pvp;
         total = total + subtotal[cont];
-        var fila = '<tr class="selected" id="fila'+cont+'"><td><input type="hidden" name="product_id[]" value="'+product_id+'">'
-            +producto+'</td> <td> <input type="hidden" id="price[]" name="price[]" value="'
-            + price + '"> <input class="form-control" type="number" id="price[]" value="'
-            + price + '" disabled> </td>  <td> <input type="hidden" name="quantity[]" value="'
-            + quantity + '"> <input class="form-control" type="number" value="'
-            + quantity + '" disabled> </td> <td align="right">s/'
+        let fila = '<tr class="selected" id="fila'+cont+'"><td><input type="hidden" name="producto_id[]" value="'+producto_id+'">'
+            +producto+'</td> <td> <input type="hidden" id="pvp[]" name="pvp[]" value="'
+            + pvp + '"> <input class="form-control" type="number" id="pvp[]" value="'
+            + pvp + '" disabled> </td>  <td> <input type="hidden" name="cantidad[]" value="'
+            + cantidad + '"> <input class="form-control" type="number" value="'
+            + cantidad + '" disabled> </td> <td align="right">s/'
             + subtotal[cont] + ' </td><td><button type="button" class="btn btn-danger btn-sm" onclick="eliminar('
             +cont+');"><i class="fa fa-times"></i></button></td></tr>';
         cont++;
@@ -35,22 +36,19 @@ function agregar() {
 }
 
 function limpiar() {
-    $("#quantity").val("");
-    $("#price").val("");
+    $("#cantidad").val("");
+    $("#pvp").val("");
 }
 
 function totales() {
     $("#total").html(total.toFixed(2));
     total_pagar = total;
-    $("#total_pagar_html").html(total_pagar.toFixed(2));
     $("#total_pagar").val(total_pagar.toFixed(2));
 }
 
 function eliminar(index) {
     total = total - subtotal[index];
-    total_pagar_html = total;
     $("#total").html(total);
-    $("#total_pagar_html").html(total_pagar_html);
     $("#total_pagar").val(total_pagar_html.toFixed(2));
     $("#fila" + index).remove();
     evaluar();

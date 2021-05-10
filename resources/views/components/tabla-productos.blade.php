@@ -25,15 +25,6 @@
             </tr>
         </thead>
         <tbody class="divide-y divide-gray-200">
-            {{-- <tr>
-                <td class="px-6 py-4"></td>
-                <td class="px-6 py-4"></td>
-                <td class="px-6 py-4 text-center"></td>
-                <td class="px-6 py-4 text-center"></td>
-                <td class="px-6 py-4 text-center">
-                    <a href="#" class="text-purple-800 hover:underline">Borrar</a>
-                </td>
-            </tr> --}}
         </tbody>
         <tfoot>
             <tr>
@@ -43,7 +34,7 @@
                 <th>
                     <p>
                         <span id="total">0.00</span>
-                        {{-- <input type="hidden" name="total" id="total"> --}}
+                        <input type="hidden" name="total" id="total_pagar">
                     </p>
                 </th>
             </tr>

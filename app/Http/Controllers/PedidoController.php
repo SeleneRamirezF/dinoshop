@@ -43,7 +43,7 @@ class PedidoController extends Controller
             'fecha'=>Carbon::now()
             ]);
         //recorremos el array del pedido y creamos los detalle del pedido
-        foreach($request->product_id as $key => $producto){
+        foreach($request->producto_id as $key => $producto){
             $resultado[] = array(
                 "producto_id"=>$request->producto_id[$key],
                 "cantidad"=>$request->cantidad[$key],
@@ -61,23 +61,23 @@ class PedidoController extends Controller
         foreach ($detallesPedido as $detallePedido) {
             $subtotal += $detallePedido->cantidad * $detallePedido->precio;
         }
-        return view('pedidos.show', compact('pedido'));
+        return view('pedidos.show', compact('pedido', 'detallesPedido'));
     }
 
     public function edit(Pedido $pedido)
     {
         //$proveedors = Proveedor::get();
-        //return view('pedidos.edit', compact('proveedors'));
+        //return view('pedidos.edit', compact('pedido'));
     }
 
     public function update(UpdateRequest $request, Pedido $pedido)
     {
-        //
+        //$pedido->update($request->all());
+        // return redirect()->route('pedidos.index');
     }
 
     public function destroy(Pedido $pedido)
     {
-        //provisional
         //$pedido->delete();
         //return redirect()->route('pedidos.index')->with('mensaje', 'Pedido borrado correctamente');
     }
