@@ -1,5 +1,6 @@
-$(document).ready(function (event) {
-    $("#agregar").click(function () {
+
+$(document).ready(function () {
+    $("#agregar").click(function (event) {
         event.preventDefault();
         agregar();
     });
