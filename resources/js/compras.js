@@ -1,8 +1,10 @@
-$(document).ready(function () {
+$(document).ready(function (event) {
     $("#agregar").click(function () {
+        event.preventDefault();
         agregar();
     });
 });
+
 let cont = 0;
 let total = 0;
 let subtotal = [];
