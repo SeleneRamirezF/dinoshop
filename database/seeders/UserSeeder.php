@@ -18,8 +18,8 @@ class UserSeeder extends Seeder
         User::create([
             'name'=>'admin',
             'email'=>'admin@dinoshop.es',
-            'password'=>Hash::make('dinoshop'),
-            'email_verified_at'=>now()
+            'email_verified_at'=>now(),
+            'password'=>Hash::make('dinoshop')
         ]);
     }
 }

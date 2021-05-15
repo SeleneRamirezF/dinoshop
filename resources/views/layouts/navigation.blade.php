@@ -13,7 +13,24 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
+                        {{ ('Inicio') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('productos.index')" :active="request()->routeIs('productos.index')">
+                        {{'Productos'}}
+                    </x-nav-link>
+                    <x-nav-link :href="route('ventas.index')" :active="request()->routeIs('ventas.index')">
+                        {{'Gestionar Ventas'}}
+                    </x-nav-link>
+                    <x-nav-link :href="route('contact.create')" :active="request()->routeIs('contact.create')">
+                        {{'Contacto'}}
+                    </x-nav-link>
+
+                @if(Auth::user()->id == 1 )
+                    <x-nav-link :href="route('productos.index')" :active="request()->routeIs('productos.index')">
+                        {{'Gestionar Productos'}}
+                    </x-nav-link>
+                    <x-nav-link :href="route('ventas.index')" :active="request()->routeIs('ventas.index')">
+                        {{'Gestionar Ventas'}}
                     </x-nav-link>
                     <x-nav-link :href="route('categorias.index')" :active="request()->routeIs('categorias.index')">
                         {{'Gestionar Categorías'}}
@@ -21,18 +38,15 @@
                     <x-nav-link :href="route('proveedors.index')" :active="request()->routeIs('proveedors.index')">
                         {{'Gestionar Proveedores'}}
                     </x-nav-link>
-                    <x-nav-link :href="route('productos.index')" :active="request()->routeIs('productos.index')">
-                        {{'Gestionar Productos'}}
-                    </x-nav-link>
                     <x-nav-link :href="route('clientes.index')" :active="request()->routeIs('clientes.index')">
                         {{'Gestionar Clientes'}}
                     </x-nav-link>
                     <x-nav-link :href="route('pedidos.index')" :active="request()->routeIs('pedidos.index')">
                         {{'Gestionar Pedidos'}}
                     </x-nav-link>
-                    <x-nav-link :href="route('ventas.index')" :active="request()->routeIs('ventas.index')">
-                        {{'Gestionar Ventas'}}
-                    </x-nav-link>
+                @endif
+
+
                 </div>
             </div>
 
@@ -87,8 +101,19 @@
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                {{'Dashboard'}}
+                {{'Inicio'}}
             </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('productos.index')" :active="request()->routeIs('productos.index')">
+                {{'Productos'}}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('productos.index')" :active="request()->routeIs('productos.index')">
+                {{'Gestionar Productos'}}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('contact.create')" :active="request()->routeIs('contact.create')">
+                {{'Contacto'}}
+            </x-responsive-nav-link>
+
+        @if(Auth::user()->id == 1 )
             <x-responsive-nav-link :href="route('categorias.index')" :active="request()->routeIs('categorias.index')">
                 {{'Gestionar Categorías'}}
             </x-responsive-nav-link>
@@ -104,9 +129,10 @@
             <x-responsive-nav-link :href="route('pedidos.index')" :active="request()->routeIs('pedidos.index')">
                 {{'Gestionar Pedidos'}}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('ventas.index')" :active="request()->routeIs('ventas.index')">
-                {{'Gestionar Ventas'}}
+            <x-responsive-nav-link :href="route('productos.index')" :active="request()->routeIs('productos.index')">
+                {{'Gestionar Productos'}}
             </x-responsive-nav-link>
+        @endif
         </div>
 
         <!-- Responsive Settings Options -->

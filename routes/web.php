@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ContactoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,4 +34,9 @@ Route::resource('ventas', 'App\Http\Controllers\VentaController');
 
 require __DIR__.'/auth.php';
 
+//Rutas para la gestion del contacto
+Route::get('contact', [ContactoController::class, 'create'])
+    ->middleware(['auth', 'verified'])->name('contact.create');
+Route::post('contact', [ContactoController::class, 'send'])
+    ->middleware(['auth', 'verified'])->name('contact.send');
 
