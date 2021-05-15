@@ -6,12 +6,13 @@ use App\Models\Pedido;
 use Illuminate\Http\Request;
 use App\Http\Requests\Pedido\StoreRequest;
 use App\Http\Requests\Pedido\UpdateRequest;
+use App\Models\DetallePedido;
 use App\Models\Producto;
 use App\Models\Proveedor;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Log;
 
 class PedidoController extends Controller
 {
@@ -23,7 +24,8 @@ class PedidoController extends Controller
     }
     public function index()
     {
-        $pedidos = Pedido::get();
+        //$pedidos = Pedido::get();
+        $pedidos = Pedido::orderBy('id')->paginate(5);
         return view('pedidos.index', compact('pedidos'));
     }
 
@@ -43,10 +45,12 @@ class PedidoController extends Controller
             'fecha'=>Carbon::now()
             ]);
         //recorremos el array del pedido y creamos los detalle del pedido
-        foreach($request->producto_id as $key => $producto){
+       // dd($request->producto_id);
+       //dd($request->product_id);
+        foreach($request->product_id as $key => $producto){
             $resultado[] = array(
-                "producto_id"=>$request->producto_id[$key],
-                "cantidad"=>$request->cantidad[$key],
+                "producto_id"=>$request->product_id[$key],
+                "cantidad"=>$request->cantidad1[$key],
                 "precio"=>$request->precio[$key]
             );
         }
@@ -56,30 +60,39 @@ class PedidoController extends Controller
 
     public function show(Pedido $pedido)
     {
-        $subtotal = 0 ;
+        // $subtotal = 0 ;
         $detallesPedido = $pedido->detallesPedido;
-        foreach ($detallesPedido as $detallePedido) {
-            $subtotal += $detallePedido->cantidad * $detallePedido->precio;
-        }
+        // foreach ($detallesPedido as $detallePedido) {
+        //     $subtotal += $detallePedido->cantidad * $detallePedido->precio;
+        // }
         return view('pedidos.show', compact('pedido', 'detallesPedido'));
     }
 
     public function edit(Pedido $pedido)
     {
-        //$proveedors = Proveedor::get();
-        //return view('pedidos.edit', compact('pedido'));
+        return view('pedidos.edit', compact('pedido'));
     }
 
     public function update(UpdateRequest $request, Pedido $pedido)
     {
-        //$pedido->update($request->all());
-        // return redirect()->route('pedidos.index');
+        app(DetallePedidoController::class)->cambiarEstado($pedido);
+        $pedido->update($request->all());
+        return redirect()->route('pedidos.index');
     }
 
     public function destroy(Pedido $pedido)
     {
-        //$pedido->delete();
-        //return redirect()->route('pedidos.index')->with('mensaje', 'Pedido borrado correctamente');
+        //$detallesPedido = $pedido->detallesPedido;
+        $pedido->delete();
+        //me traigo todos los registros de datallesPedido
+        //y busco el que coincide con este pedido
+        // $todosDetallesP = DetallePedido::get();
+        // foreach ($todosDetallesP as $dP) {
+        //     if( $dP->pedido_id == $pedido->id){
+        //         app(DetallePedidoController::class)->destroy($dP);
+        //     }
+        // }
+        return redirect()->route('pedidos.index')->with('mensaje', 'Pedido borrado correctamente');
     }
     public function cambiarEstado(Pedido $pedido)
     {

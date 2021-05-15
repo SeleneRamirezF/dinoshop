@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
         $this->call(UserSeeder::class);
         $this->call(CategoriaSeeder::class);
         $this->call(ProveedorSeeder::class);
-        \App\Models\Producto::factory(300)->create();
+        \App\Models\Producto::factory(50)->create();
 
 
     }

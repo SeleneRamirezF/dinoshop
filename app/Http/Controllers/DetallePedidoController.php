@@ -80,6 +80,7 @@ class DetallePedidoController extends Controller
      */
     public function destroy(DetallePedido $detallePedido)
     {
-        //
+        $detallePedido->delete();
+        return redirect()->route('pedidos.index')->with('mensaje', 'Detalles del pedido borrados correctamente');
     }
 }

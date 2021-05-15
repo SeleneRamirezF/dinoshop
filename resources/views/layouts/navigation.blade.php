@@ -30,6 +30,9 @@
                     <x-nav-link :href="route('pedidos.index')" :active="request()->routeIs('pedidos.index')">
                         {{'Gestionar Pedidos'}}
                     </x-nav-link>
+                    <x-nav-link :href="route('ventas.index')" :active="request()->routeIs('ventas.index')">
+                        {{'Gestionar Ventas'}}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -100,6 +103,9 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('pedidos.index')" :active="request()->routeIs('pedidos.index')">
                 {{'Gestionar Pedidos'}}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('ventas.index')" :active="request()->routeIs('ventas.index')">
+                {{'Gestionar Ventas'}}
             </x-responsive-nav-link>
         </div>
 

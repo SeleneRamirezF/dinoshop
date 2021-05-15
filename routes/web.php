@@ -27,7 +27,7 @@ Route::resource('proveedors', 'App\Http\Controllers\ProveedorController');
 Route::resource('productos', 'App\Http\Controllers\ProductoController');
 Route::resource('clientes', 'App\Http\Controllers\ClienteController');
 Route::resource('pedidos', 'App\Http\Controllers\PedidoController');
-
+Route::resource('ventas', 'App\Http\Controllers\VentaController');
 
 //-----------------------------------------------------
 

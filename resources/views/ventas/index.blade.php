@@ -7,22 +7,18 @@
 
     <div class="container mt-3 mx-auto p-2 w-4/5">
         <x-mensajes-alertas />
-        <a href="{{route('pedidos.create')}}"
-            class="bg-green-600 hover:bg-green-800 rounded text-white font-bold py-2 px-4 shadow">
-            <i class="fa fa-plus"></i> Nueva Pedido</a>
-
         <div class="text-center grid grid-cols-6 py-2 gap-2 mt-10 border-2 border-blue-200 shadow text-xm">
             <div class="font-bold text-gray-700">Detalle</div>
             <div class="font-bold text-gray-700">ID</div>
-            <div class="font-bold text-gray-700">Proveedor</div>
+            <div class="font-bold text-gray-700">Cliente</div>
             <div class="font-bold text-gray-700">Usuario</div>
             <div class="font-bold text-gray-700">Estado</div>
             <div class="font-bold text-gray-700">Acciones</div>
         </div>
         <div class="text-center grid grid-cols-6 py-2 gap-2 mt-10 border-2 border-blue-200 shadow py-5 text-xs">
-            @foreach($pedidos as $item)
+            @foreach($ventas as $item)
             <div class="mb-5">
-                <a href="{{route('pedidos.show', $item)}}"
+                <a href="{{route('ventas.show', $item)}}"
                     class="bg-purple-400 hover:bg-green-200 rounded text-white font-bold py-2 px-4 shadow">
                     <i class="fa fa-info"></i> Detalle</a>
             </div>
@@ -30,7 +26,7 @@
                 {{$item->id}}
             </div>
             <div>
-                {{$item->proveedor_id}}
+                {{$item->cliente_id}}
             </div>
             <div>
                 {{$item->user->name}}
@@ -39,7 +35,7 @@
                 {{$item->estado}}
             </div>
             <div>
-                <form action="{{route('pedidos.destroy', $item)}}" method="POST">
+                <form action="{{route('ventas.destroy', $item)}}" method="POST">
                     @csrf
                     @method("DELETE")
                     <button type="submit"
@@ -52,7 +48,7 @@
             @endforeach
         </div>
         <div class="mt-4">
-            {{$pedidos->links()}}
+            {{$ventas->links()}}
         </div>
     </div>
 

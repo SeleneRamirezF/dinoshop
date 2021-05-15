@@ -22,7 +22,7 @@ class ProductoFactory extends Factory
     public function definition()
     {
         return [
-            'nombre'=>ucwords($this->faker->word()),
+            'nombre'=>ucwords($this->faker->unique()->word()),
             'descripcion'=>ucfirst($this->faker->text(250)),
             'pvp'=>$this->faker->randomFloat($nbMaxDecimals = 2, $min = 0, $max = 500),
             'stock'=>$this->faker->numberBetween($min=1, $max=100),

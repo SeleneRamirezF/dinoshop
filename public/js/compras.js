@@ -1,30 +1,25 @@
-
 $(document).ready(function () {
-    $("#agregar").click(function () {
+    $("#agregar").click(function (event) {
+       event.preventDefault();
+
         agregar();
     });
-
-    //var a = $("#product_id option:selected" ).text();
-    // $('#product_id').on('change', function() {
-    //    // $('#price').val("{{$itemP->pvp}}");
-    //     $("#price").attr("placeholder",'{{$itemP->pvp}}');
-    // });
 });
 let cont = 0;
 let total = 0;
 let subtotal = [];
-// $("#guardar").hide();
 
 function agregar() {
 
-    product_id = $("#product_id").val();
-    producto = $("#product_id option:selected").text();
-    quantity = $("#quantity").val();
-    price = $("#price").val();
+    product_id = $("#producto_id").find(":selected").val();
+    producto = $("#producto_id option:selected").text();
+    quantity = $("#cantidad").val();
+    price = $("#pvp").val();
   if (product_id != "" && quantity != "" && quantity > 0 && price != "") {
         subtotal[cont] = quantity * price;
         total = total + subtotal[cont];
-        var fila = '<tr class="selected" id="fila'+cont+'"><td><input type="hidden" name="product_id[]" value="'+product_id+'">'+producto+'</td> <td> <input type="hidden" id="price[]" name="price[]" value="' + price + '"> <input class="form-control" type="number" id="price[]" value="' + price + '" disabled> </td>  <td> <input type="hidden" name="quantity[]" value="' + quantity + '"> <input class="form-control" type="number" value="' + quantity + '" disabled> </td> <td align="right">s/' + subtotal[cont] + ' </td><td><button type="button" class="btn btn-danger btn-sm" onclick="eliminar('+cont+');"><i class="fa fa-times"></i></button></td></tr>';
+        //var fila = '<tr class="selected" id="fila'+cont+'"><td><input type="hidden" name="product_id[]" value="'+product_id+'">'+producto+'</td> <td> <input type="hidden" id="price[]" name="precio[]" value="' + price + '"> <input class="form-control" type="number" id="price[]" value="' + price + '" disabled> </td>  <td> <input type="hidden" name="cantidad1[]" value="' + quantity + '"> <input class="form-control" type="number" value="' + quantity + '" disabled> </td> <td align="right">s/' + subtotal[cont] + ' </td><td><button type="button" class="btn btn-danger btn-sm" onclick="eliminar('+cont+');"><i class="fa fa-times"></i></button></td></tr>';
+        var fila = '<tr class="selected" id="fila'+cont+'"><td><input class="form-control text-center" type="hidden" name="product_id[]" value="'+product_id+'">'+producto+'</td> <td> <input class="form-control text-center" type="hidden" id="price[]" name="precio[]" value="' + price + '"> <input class="form-control text-center" type="number" id="price[]" value="' + price + '" disabled> </td>  <td> <input class="form-control text-center" type="hidden" name="cantidad1[]" value="' + quantity + '"> <input class="form-control text-center" type="number" value="' + quantity + '" disabled> </td> <td class="text-center">' + subtotal[cont] + ' € </td><td><button class="bg-red-500 w-10 h-10 p-3 text-sm font-bold tracking-wider text-white rounded-full hover:bg-blue-600 inline-flex items-center justify-center" onclick="eliminar('+cont+');"><i class="fas fa-times"></i></button></td></tr>';
         cont++;
         limpiar();
         totales();

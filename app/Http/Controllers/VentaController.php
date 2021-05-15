@@ -13,29 +13,29 @@ class VentaController extends Controller
 {
     public function index()
     {
-        $ventas = Venta::orderBy('nombre');
+        $ventas = Venta::orderBy('id')->paginate(4);
         return view('ventas.index', compact('ventas'));
     }
 
     public function create()
     {
-        $clientes = Cliente::get();
-        return view('ventas.create', compact('clientes'));
+        // $clientes = Cliente::orderBy('id')->paginate(4);
+        // return view('ventas.create', compact('clientes'));
     }
 
     public function store(Request $request)
     {
-        $venta = Venta::create($request->all());
-        //recorremos el array del pedido y creamos los detalle del pedido
-        foreach($request->producto_id as $key => $producto){
-            $resultado[] = array(
-                "producto_id"=>$request->producto_id[$key],
-                "cantidad"=>$request->cantidad[$key],
-                "precio"=>$request->precop[$key]
-            );
-        }
-        $venta->detallesVenta()->createMany($resultado);
-        return redirect()->route('ventas.index');
+        // $venta = Venta::create($request->all());
+        // //recorremos el array del pedido y creamos los detalle del pedido
+        // foreach($request->producto_id as $key => $producto){
+        //     $resultado[] = array(
+        //         "producto_id"=>$request->producto_id[$key],
+        //         "cantidad"=>$request->cantidad[$key],
+        //         "precio"=>$request->precop[$key]
+        //     );
+        // }
+        // $venta->detallesVenta()->createMany($resultado);
+        // return redirect()->route('ventas.index');
     }
 
     public function show(Venta $venta)
@@ -45,8 +45,8 @@ class VentaController extends Controller
 
     public function edit(Venta $venta)
     {
-        $clientes = Cliente::get();
-        return view('ventas.edit', compact('ventas'));
+        // $clientes = Cliente::get();
+        // return view('ventas.edit', compact('ventas'));
     }
 
     public function update(Request $request, Venta $venta)
@@ -57,5 +57,7 @@ class VentaController extends Controller
     public function destroy(Venta $venta)
     {
         //
+        $venta->delete();
+        return redirect()->route('ventas.index')->with('mensaje', 'Venta borrada correctamente');
     }
 }
