@@ -399,7 +399,7 @@
         }
 
         #fondo {
-            background-color: rgb(220, 247, 225);
+            background-color: rgb(243, 131, 66);
         }
 
     </style>
@@ -423,26 +423,27 @@
                             <div class="ml-4 text-lg leading-7 font-semibold">
                                 <p class="text-gray-900 dark:text-white">Entra en la Tienda Jurásica</p>
                             </div>
-                        </div>
 
-                        <div class="ml-12">
-                            <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                                @if (Route::has('login'))
-                                    @auth
-                                        <a href="{{ url('/dashboard') }}"
-                                            class="text-sm text-gray-700 underline">Tablero</a>
-                                @else
-                                        <a href="{{ route('login') }}" class="text-sm text-gray-700 underline">Iniciar
-                                            sesión</a>
+                            <div class="ml-12">
+                                <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
+                                    @if (Route::has('login'))
+                                        @auth
+                                            <a href="{{ url('/dashboard') }}"
+                                                class="text-sm text-gray-700 underline">Tablero</a>
+                                    @else
+                                            <a href="{{ route('login') }}" class="text-sm text-gray-700 underline">Iniciar
+                                                sesión</a>
 
-                                        @if (Route::has('register'))
-                                            <a href="{{ route('register') }}"
-                                                class="ml-4 text-sm text-gray-700 underline">Registrarse</a>
-                                        @endif
-                                    @endauth
-                                @endif
+                                            @if (Route::has('register'))
+                                                <a href="{{ route('register') }}"
+                                                    class="ml-4 text-sm text-gray-700 underline">Registrarse</a>
+                                            @endif
+                                        @endauth
+                                    @endif
+                                </div>
                             </div>
                         </div>
+
 
                     </div>
                 </div>
