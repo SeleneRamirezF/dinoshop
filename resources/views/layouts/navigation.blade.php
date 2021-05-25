@@ -12,6 +12,7 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                @if(Auth::user()->id != 1 )
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ ('Inicio') }}
                     </x-nav-link>
@@ -24,8 +25,11 @@
                     <x-nav-link :href="route('contact.create')" :active="request()->routeIs('contact.create')">
                         {{'Contacto'}}
                     </x-nav-link>
-
+                @endif
                 @if(Auth::user()->id == 1 )
+                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                        {{ ('Inicio') }}
+                    </x-nav-link>
                     <x-nav-link :href="route('productos.index')" :active="request()->routeIs('productos.index')">
                         {{'Gestionar Productos'}}
                     </x-nav-link>
@@ -100,6 +104,7 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
+        @if(Auth::user()->id != 1 )
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{'Inicio'}}
             </x-responsive-nav-link>
@@ -112,8 +117,11 @@
             <x-responsive-nav-link :href="route('contact.create')" :active="request()->routeIs('contact.create')">
                 {{'Contacto'}}
             </x-responsive-nav-link>
-
+        @endif
         @if(Auth::user()->id == 1 )
+            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                {{'Inicio'}}
+            </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('categorias.index')" :active="request()->routeIs('categorias.index')">
                 {{'Gestionar Categorías'}}
             </x-responsive-nav-link>
