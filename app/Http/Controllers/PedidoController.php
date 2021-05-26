@@ -61,10 +61,11 @@ class PedidoController extends Controller
     public function show(Pedido $pedido)
     {
         // $subtotal = 0 ;
-        $detallesPedido = $pedido->detallesPedido;
+        //$detallesPedido = $pedido->detallesPedido;
         // foreach ($detallesPedido as $detallePedido) {
         //     $subtotal += $detallePedido->cantidad * $detallePedido->precio;
         // }
+        $detallesPedido = DetallePedido::orderBy('id')->get();
         return view('pedidos.show', compact('pedido', 'detallesPedido'));
     }
 
