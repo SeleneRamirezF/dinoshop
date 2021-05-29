@@ -48,7 +48,7 @@ class VentaController extends Controller
                 "precio"=>$request->precio[$key]
             );
         }
-        $venta->detallePedido()->createMany($resultado);
+        $venta->detallesVenta()->createMany($resultado);
         return redirect()->route('ventas.index');
     }
 

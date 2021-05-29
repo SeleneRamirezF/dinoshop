@@ -43,13 +43,13 @@
             <tbody class="divide-y divide-gray-200">
                 @foreach($ventas as $item)
                 <tr>
-                    <td class="px-6 py-4 text-center">
+                    {{-- <td class="px-6 py-4 text-center">
                         <div class="flex items-center space-x-3">
                             <a href="{{route('ventas.show', $item)}}" class="text-purple-800 hover:underline">
                                 <i class="fa fa-info"></i>
                             </a>
                         </div>
-                    </td>
+                    </td> --}}
                     <td class="px-6 py-4 text-center">
                         <p class="text-gray-500 text-sm font-semibold tracking-wide">
                             {{$item->id}}

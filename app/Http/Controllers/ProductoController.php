@@ -19,10 +19,17 @@ class ProductoController extends Controller
             ['only'=>['edit', 'update', 'create', 'destroy', 'store' ]]
         );
     }
-    public function index()
+    public function index(Request $request)
     {
-        $productos = Producto::orderBy('nombre')->paginate(5);
-        return view('productos.index', compact('productos'));
+        $productos = Producto::orderBy('nombre')
+            ->nombre($request->get('nombre'))
+            ->categoria($request->get('categoria'))
+            ->paginate(4)
+            ->withQueryString();
+        $selectOption = $request->nombre;//%/1/2/3/4
+        $selectOptionC = $request->categoria;
+
+        return view('productos.index', compact('productos', 'selectOption', 'selectOptionC'));
     }
 
     public function create()
