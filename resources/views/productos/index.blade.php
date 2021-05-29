@@ -19,9 +19,6 @@
         <table class='mx-auto max-w-4xl w-full whitespace-nowrap rounded-lg bg-white divide-y divide-gray-300 overflow-hidden'>
             <thead class="bg-gray-50">
                 <tr class="text-gray-600 text-left">
-                    {{-- <th class="font-semibold text-sm uppercase px-6 py-4 text-center">
-                        Detalle
-                    </th> --}}
                     <th class="font-semibold text-sm uppercase px-6 py-4 text-center">
                         Nombre
                     </th>
@@ -48,13 +45,6 @@
             <tbody class="divide-y divide-gray-200">
                 @foreach($productos as $item)
                 <tr>
-                    {{-- <td class="px-6 py-4 text-center">
-                        <div class="flex items-center space-x-3">
-                            <a href="{{route('productos.show', $item)}}" class="text-purple-800 hover:underline">
-                                <i class="fa fa-info"></i>
-                            </a>
-                        </div>
-                    </td> --}}
                     <td class="px-6 py-4 text-center">
                         <p class="text-gray-500 text-sm font-semibold tracking-wide">
                             {{$item->nombre}}

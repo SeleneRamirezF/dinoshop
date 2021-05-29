@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <script src="{{ asset('js/compras.js') }}"></script>
-        <script type="text/javascript" src="/js/compras.js"></script>
+        {{-- <script type="text/javascript" src="/js/compras.js"></script> --}}
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{'Crear Pedido'}}
         </h2>

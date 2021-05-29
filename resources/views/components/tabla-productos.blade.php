@@ -5,12 +5,13 @@
 </div>
 
 {{-- tabla de productos --}}
-<div>
-    <table id="detalles" class='mx-auto max-w-4xl w-full whitespace-nowrap rounded-lg bg-white divide-y divide-gray-300
-    overflow-hidden'>
+<div class="min-h-full mt-3 flex items-center px-2">
+    <div class='overflow-x-auto w-full'>
+
+    <table id="detalles" class='mx-auto max-w-4xl w-full whitespace-nowrap rounded-lg bg-white divide-y divide-gray-300 overflow-hidden'>
         <thead class="bg-gray-50">
             <tr class="text-gray-600 text-left">
-                <th class="font-semibold text-sm uppercase px-6 py-4">
+                <th class="font-semibold text-sm uppercase px-6 py-4 text-center">
                     Producto
                 </th>
                 <th class="font-semibold text-sm uppercase px-6 py-4 text-center">
@@ -40,5 +41,6 @@
             </tr>
         </tfoot>
     </table>
+</div>
 </div>
 {{-- fin tabla de productos --}}
