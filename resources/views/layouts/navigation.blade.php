@@ -48,6 +48,9 @@
                     <x-nav-link :href="route('pedidos.index')" :active="request()->routeIs('pedidos.index')">
                         {{'Gestionar Pedidos'}}
                     </x-nav-link>
+                    <x-nav-link :href="route('usuarios.index')" :active="request()->routeIs('usuarios.index')">
+                        {{'Gestionar Usuarios'}}
+                    </x-nav-link>
                 @endif
 
 
