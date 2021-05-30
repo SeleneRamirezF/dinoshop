@@ -6,6 +6,8 @@ use App\Models\Cliente;
 use Illuminate\Http\Request;
 use App\Http\Requests\Cliente\StoreRequest;
 use App\Http\Requests\Cliente\UpdateRequest;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 class ClienteController extends Controller
 {
@@ -52,9 +54,14 @@ class ClienteController extends Controller
         $cliente->telefono=$datos['telefono'];
         $cliente->email=$datos['email'];
 
-        if(isset($datos['nombre_imagen'])){
-            $cliente->imagen=$datos['nombre_imagen'];
+        if($request->has('imagen')){
+            $request->validate(['imagen'=>['image']]);
+            $ficheroSubido=$request->file('imagen');
+            $nombre = "img/clientes/".uniqid()."_".$ficheroSubido->getClientOriginalName();
+            Storage::Disk("public")->put($nombre, File::get($ficheroSubido));
+            $cliente->imagen="storage/".$nombre;
         }
+
         try {
             $cliente->save();
             return redirect()->route('clientes.index');

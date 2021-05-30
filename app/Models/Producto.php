@@ -63,27 +63,11 @@ class Producto extends Model
     public function scopeCategoria($query, $valor)
     {
         if (!isset($valor)) {
-            return $query->where('categoria_id', 'like', '1')
-            ->orwhere('categoria_id', 'like', '2')
-            ->orwhere('categoria_id', 'like', '3')
-            ->orwhere('categoria_id', 'like', '4')
-            ->orwhere('categoria_id', 'like', '5')
-            ->orwhere('categoria_id', 'like', '6')
-            ->orwhere('categoria_id', 'like', '7')
-            ->orwhere('categoria_id', 'like', '8')
-            ->orwhere('categoria_id', 'like', '9');
+            return $query->where('categoria_id', 'like', '%');
         }
         switch ($valor) {
             case "0":
-                return $query->where('categoria_id', 'like', '1')
-                ->orwhere('categoria_id', 'like', '2')
-                ->orwhere('categoria_id', 'like', '3')
-                ->orwhere('categoria_id', 'like', '4')
-                ->orwhere('categoria_id', 'like', '5')
-                ->orwhere('categoria_id', 'like', '6')
-                ->orwhere('categoria_id', 'like', '7')
-                ->orwhere('categoria_id', 'like', '8')
-                ->orwhere('categoria_id', 'like', '9');
+                return $query->where('categoria_id', 'like', '%');
             case "1":
                 return $query->where('categoria_id', 'like', '1');
             case "2":
@@ -102,6 +86,50 @@ class Producto extends Model
                 return $query->where('categoria_id', 'like', '8');
             case "8":
                 return $query->where('categoria_id', 'like', '9');
+        }
+    }
+    public function scopePvp($query, $valor)
+    {
+        if (!isset($valor)) {
+            return $query->where('pvp', '>=', 0);
+        }
+        switch ($valor) {
+            case "%":
+                return $query->where('pvp', '>=', 0);
+            case "1":
+                return $query->where('pvp', '>=', 1)
+                    ->where('pvp', '<', 50);
+            // ->where([
+            //     ['pvp', '>=', 1],
+            //     ['pvp', '<=', 50]
+            //     ]);
+            case "2":
+                return $query->where([
+                    ['pvp', '>=', 50],
+                    ['pvp', '<', 100],
+                ]);
+            case "3":
+                return $query->where([
+                    ['pvp', '>=', 100],
+                    ['pvp', '<', 200],
+                ]);
+            case "4":
+                return $query->where([
+                    ['pvp', '>=', 200],
+                    ['pvp', '<', 400],
+                ]);
+            case "5":
+                return $query->where([
+                    ['pvp', '>=', 400],
+                    ['pvp', '<', 600],
+                ]);
+            case "6":
+                return $query->where([
+                    ['pvp', '>=', 600],
+                    ['pvp', '<', 800],
+                ]);
+            case "7":
+                return $query->where('pvp', '>', 800);
         }
     }
 

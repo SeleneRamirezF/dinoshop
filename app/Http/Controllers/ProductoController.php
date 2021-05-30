@@ -2,21 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Producto;
-use Illuminate\Http\Request;
 use App\Http\Requests\Producto\StoreRequest;
-use App\Http\Requests\Producto\UpdateRequest;
 use App\Models\Categoria;
+use App\Models\Producto;
 use App\Models\Proveedor;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 
 class ProductoController extends Controller
 {
-    public function __construct(){
+    public function __construct()
+    {
         $this->middleware(
-            ['auth','verified'],
-            ['only'=>['edit', 'update', 'create', 'destroy', 'store' ]]
+            ['auth', 'verified'],
+            ['only' => ['edit', 'update', 'create', 'destroy', 'store']]
         );
     }
     public function index(Request $request)
@@ -24,12 +24,14 @@ class ProductoController extends Controller
         $productos = Producto::orderBy('nombre')
             ->nombre($request->get('nombre'))
             ->categoria($request->get('categoria'))
+            ->pvp($request->get('pvp'))
             ->paginate(4)
             ->withQueryString();
-        $selectOption = $request->nombre;//%/1/2/3/4
+        $selectOption = $request->nombre;
         $selectOptionC = $request->categoria;
+        $selectOptionPVP = $request->pvp;
 
-        return view('productos.index', compact('productos', 'selectOption', 'selectOptionC'));
+        return view('productos.index', compact('productos', 'selectOption', 'selectOptionC', 'selectOptionPVP'));
     }
 
     public function create()
@@ -43,21 +45,26 @@ class ProductoController extends Controller
     {
         $datos = $request->validated();
         $producto = new Producto();
-        $producto->nombre=$datos['nombre'];
-        $producto->descripcion=$datos['descripcion'];
-        $producto->pvp=$datos['pvp'];
-        $producto->stock=$datos['stock'];
-        $producto->categoria_id=$datos['categoria_id'];
-        $producto->proveedor_id=$datos['proveedor_id'];
+        $producto->nombre = $datos['nombre'];
+        $producto->descripcion = $datos['descripcion'];
+        $producto->pvp = $datos['pvp'];
+        $producto->stock = $datos['stock'];
+        $producto->categoria_id = $datos['categoria_id'];
+        $producto->proveedor_id = $datos['proveedor_id'];
 
-        if(isset($datos['nombre_imagen'])){
-            $producto->imagen=$datos['nombre_imagen'];
+        if($request->has('imagen')){
+            $request->validate(['imagen'=>['image']]);
+            $ficheroSubido=$request->file('imagen');
+            $nombre = "img/productos/".uniqid()."_".$ficheroSubido->getClientOriginalName();
+            Storage::Disk("public")->put($nombre, File::get($ficheroSubido));
+            $producto->imagen="storage/".$nombre;
         }
+
         try {
             $producto->save();
             return redirect()->route('productos.index');
         } catch (\Exception $ex) {
-            return redirect()->route('productos.index')->with('error', 'No se puede crear el producto: ' . $ex->getMessage());;
+            return redirect()->route('productos.index')->with('error', 'No se puede crear el producto: ' . $ex->getMessage());
         }
     }
 
@@ -76,23 +83,26 @@ class ProductoController extends Controller
     public function update(StoreRequest $request, Producto $producto)
     {
         $datos = $request->validated();
-        $producto->nombre=$datos['nombre'];
-        $producto->descripcion=$datos['descripcion'];
-        $producto->pvp=$datos['pvp'];
-        $producto->stock=$datos['stock'];
-        $producto->categoria_id=$datos['categoria_id'];
-        $producto->proveedor_id=$datos['proveedor_id'];
+        $producto->nombre = $datos['nombre'];
+        $producto->descripcion = $datos['descripcion'];
+        $producto->pvp = $datos['pvp'];
+        $producto->stock = $datos['stock'];
+        $producto->categoria_id = $datos['categoria_id'];
+        $producto->proveedor_id = $datos['proveedor_id'];
 
-        if(isset($datos['nombre_imagen'])){
-            if(basename($producto->imagen)!='default.png') unlink($producto->imagen);
-            $producto->imagen=$datos['nombre_imagen'];
+        if (isset($datos['nombre_imagen'])) {
+            if (basename($producto->imagen) != 'default.png') {
+                unlink($producto->imagen);
+            }
+
+            $producto->imagen = $datos['nombre_imagen'];
         }
 
         try {
             $producto->update();
             return redirect()->route('productos.index');
         } catch (\Exception $ex) {
-            return redirect()->route('productos.index')->with('error', 'No se puede actualizar el producto: ' . $ex->getMessage());;
+            return redirect()->route('productos.index')->with('error', 'No se puede actualizar el producto: ' . $ex->getMessage());
         }
     }
 
