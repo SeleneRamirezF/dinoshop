@@ -12,30 +12,31 @@
 
         <form name="create" method="POST" action="{{ route('ventas.store') }}" enctype="multipart/form-data">
             @csrf
+
+            <input id="cliente_id" name="cliente_id" type="hidden" value="1">
+
             <label class="block mt-4">
-                <span class="text-gray-700">Cliente</span>
-                <x-form-input name="name" value="{{Auth::user()->name}}" label="Nombre Cliente" disabled/>
-                <input id="cliente_id" name="cliente_id" type="hidden" value="1">
-            </label>
-            <label class="block mt-4">
-                <span class="text-gray-700">Producto</span>
+                <span class="text-gray-700 text-bold text-2xl">Productos</span>
                 <select class="form-select mt-1 block w-full" name="producto_id" id="producto_id">
                   @foreach ($productos as $producto)
-                      <option class="option" value="{{$producto->id}}" data-pvp="{{$producto->pvp}}" >{{$producto->nombre}}</option>
-                  @endforeach
+                      <option class="option" value="{{$producto->id}}" data-pvp="{{$producto->pvp}}" >
+                        {{$producto->nombre}}
+                      </option>
+                      @endforeach
                 </select>
             </label>
-            <x-form-input name="cantidad" id="cantidad" label="Cantidad de producto" placeholder="Cantidad" type="number" step='1'
-            min='0'/>
+
+            <x-form-input name="cantidad" id="cantidad" label="Cantidad de producto" placeholder="Cantidad" type="number" step='1' min='0' />
             <x-form-input name="pvp" id="pvp" label="Precio compra(€)" type="number" min='0' disabled/>
 
-            <x-tabla-productos />
-
-            <div class="flex justify-end">
-                <x-form-submit id="guardar">
-                    <span class="text-white-900"><i class="fas fa-plus"></i> Crear Venta</span>
-                </x-form-submit>
+            <div class="my-4">
+                <button id="agregar" class="bg-green-600 hover:bg-green-800 rounded text-white font-bold py-2 px-4 shadow">
+                    <i class="fas fa-cart-plus"></i>
+                </button>
             </div>
+
+            <x-tabla-ventas />
+
         </form>
     </div>
 
