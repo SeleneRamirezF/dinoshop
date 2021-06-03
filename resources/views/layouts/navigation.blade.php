@@ -14,13 +14,13 @@
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                 @if(Auth::user()->id != 1 )
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ ('Inicio') }}
+                        {{'Inicio'}}
                     </x-nav-link>
                     <x-nav-link :href="route('productos.index')" :active="request()->routeIs('productos.index')">
                         {{'Productos'}}
                     </x-nav-link>
-                    <x-nav-link :href="route('ventas.index')" :active="request()->routeIs('ventas.index')">
-                        {{'Gestionar Ventas'}}
+                    <x-nav-link :href="route('ventas.create')" :active="request()->routeIs('ventas.create')">
+                        {{'Comprar'}}
                     </x-nav-link>
                     <x-nav-link :href="route('contact.create')" :active="request()->routeIs('contact.create')">
                         {{'Contacto'}}
@@ -28,7 +28,7 @@
                 @endif
                 @if(Auth::user()->id == 1 )
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ ('Inicio') }}
+                        {{'Inicio'}}
                     </x-nav-link>
                     <x-nav-link :href="route('productos.index')" :active="request()->routeIs('productos.index')">
                         {{'Gestionar Productos'}}
@@ -114,8 +114,8 @@
             <x-responsive-nav-link :href="route('productos.index')" :active="request()->routeIs('productos.index')">
                 {{'Productos'}}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('productos.index')" :active="request()->routeIs('productos.index')">
-                {{'Gestionar Productos'}}
+            <x-responsive-nav-link :href="route('ventas.create')" :active="request()->routeIs('ventas.create')">
+                {{'Comprar'}}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('contact.create')" :active="request()->routeIs('contact.create')">
                 {{'Contacto'}}

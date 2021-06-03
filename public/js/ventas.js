@@ -1,28 +1,43 @@
 $(document).ready(function () {
 
-    $(document).on('change', '#producto_id', function(event) {
+    $(document).on('change', '#producto_id', function (event) {
         $('#pvp').val($("#producto_id").find(":selected").data("pvp"));
-   });
+    });
 
     $("#agregar").click(function (event) {
-       event.preventDefault();
+        event.preventDefault();
         agregar();
     });
+
 });
+
 let cont = 0;
 let total = 0;
 let subtotal = [];
 
 function agregar() {
 
+    // console.log($("#agregar").data("producto"));
+    // console.log($("#agregar").data("nombre"));
+    // console.log($("#agregar").data("pvp"));
+    // console.log($("#cantidad").val());
+
+    //--------------------------------------------------------------
+
+    // product_id = $("#agregar").data("producto");
+    // producto = $("#agregar").data("nombre");
+    // quantity = $("#cantidad").val();
+    // price = $("#agregar").data("pvp");
+
     product_id = $("#producto_id").find(":selected").val();
     producto = $("#producto_id option:selected").text();
     quantity = $("#cantidad").val();
     price = $("#pvp").val();
-  if (product_id != "" && quantity != "" && quantity > 0 && price != "") {
+
+    if (product_id != "" && quantity != "" && quantity > 0 && price != "") {
         subtotal[cont] = quantity * price;
         total = total + subtotal[cont];
-        var fila = '<tr class="selected" id="fila'+cont+'"><td><input class="form-control text-center" type="hidden" name="product_id[]" value="'+product_id+'">'+producto+'</td> <td> <input class="form-control text-center" type="hidden" id="price[]" name="precio[]" value="' + price + '"> <input class="form-control text-center" type="number" id="price[]" value="' + price + '" disabled> </td>  <td> <input class="form-control text-center" type="hidden" name="cantidad1[]" value="' + quantity + '"> <input class="form-control text-center" type="number" value="' + quantity + '" disabled> </td> <td class="text-center">' + subtotal[cont] + ' € </td><td><button class="bg-red-500 w-10 h-10 p-3 text-sm font-bold tracking-wider text-white rounded-full hover:bg-blue-600 inline-flex items-center justify-center" onclick="eliminar('+cont+');"><i class="fas fa-times"></i></button></td></tr>';
+        var fila = '<tr class="selected" id="fila' + cont + '"><td><input class="form-control text-center" type="hidden" name="product_id[]" value="' + product_id + '">' + producto + '</td> <td> <input class="form-control text-center" type="hidden" id="price[]" name="precio[]" value="' + price + '"> <input class="form-control text-center" type="number" id="price[]" value="' + price + '" disabled> </td>  <td> <input class="form-control text-center" type="hidden" name="cantidad1[]" value="' + quantity + '"> <input class="form-control text-center" type="number" value="' + quantity + '" disabled> </td> <td class="text-center">' + subtotal[cont] + ' € </td><td><button class="bg-red-500 w-10 h-10 p-3 text-sm font-bold tracking-wider text-white rounded-full hover:bg-blue-600 inline-flex items-center justify-center" onclick="eliminar(' + cont + ');"><i class="fas fa-times"></i></button></td></tr>';
         cont++;
         limpiar();
         totales();
@@ -34,8 +49,9 @@ function agregar() {
 }
 
 function limpiar() {
-    $("#quantity").val("");
-    $("#price").val("");
+    // $("#quantity").val("");
+    // $("#price").val("");
+
 }
 
 function totales() {

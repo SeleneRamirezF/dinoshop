@@ -7,11 +7,15 @@
 
     <div class="container mt-3 mx-auto p-2 w-5/6 ">
         <x-mensajes-alertas />
-        <div>
-            <a href="{{ route('productos.create') }}"
-                class="bg-green-600 hover:bg-green-800 rounded text-white font-bold py-2 px-4 shadow">
-                <i class="fa fa-plus"></i></a>
-        </div>
+
+        @if(Auth::user()->id == 1 )
+            <div>
+                <a href="{{ route('productos.create') }}"
+                    class="bg-green-600 hover:bg-green-800 rounded text-white font-bold py-2 px-4 shadow">
+                    <i class="fa fa-plus"></i></a>
+            </div>
+        @endif
+
         <div class="text-right">
             <form name="search" action="{{ route('productos.index') }}">
                 <i class="fa fa-search"></i>
@@ -131,14 +135,16 @@
                                             class="text-purple-800 hover:underline px-1">
                                             <i class="fa fa-info"></i>
                                         </a>
-                                        <a href="{{ route('productos.edit', $item) }}"
-                                            class="text-purple-800 hover:underline px-1">
-                                            <i class="fa fa-edit"></i>
-                                        </a>
-                                        <button type="submit" class="text-purple-800 hover:underline px-1"
-                                            onclick="return confirm('¿Seguro que desea Borrar el producto: {{ $item->nombre }} ?')">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
+                                        @if(Auth::user()->id == 1 )
+                                            <a href="{{ route('productos.edit', $item) }}"
+                                                class="text-purple-800 hover:underline px-1">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                            <button type="submit" class="text-purple-800 hover:underline px-1"
+                                                onclick="return confirm('¿Seguro que desea Borrar el producto: {{ $item->nombre }} ?')">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        @endif
                                     </form>
                                 </td>
                             </tr>
