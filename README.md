@@ -1,63 +1,56 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# DinoShop.es
+Esta web ha sido creada como Proyecto Integrado de fin de curso del Ciclo Superior de Desarrollo de Aplicaciones Web (DAW).  
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Título del Proyecto
+DinoShop
+## Descripción del proyecto
+Este proyecto presenta una tienda online especializada en productos relacionados con la prehistoria y los dinosaurios.
+## Contenido de la publicación
+1. Archivos del proyecto en formato para el framework Laravel
+2. Archivo Readme.md donde se encuentran las instrucciones para su instalacion y detalles del proyecto.
+3. Directorio de imagenes con licencia creative commons que se usan en el proyecto.
+4. Directorio de Manuales con el manual de usuario y de administrador de la tienda DinoShop.
+## Desarrollo del proyecto
+* Proyecto desarroyado en 2ºDaw, año 2021.
+## Despliegue
+* [Pagina principal del proyecto](https://github.com/SeleneRamirezF/dinoshop "Pagina principal del proyecto")
+* [Pagina principal del autor](https://github.com/SeleneRamirezF "Pagina principal del autor")
+## Construido con
+* Visual Studio Code 
+## Versionado
+* 0.1
+## Autora
+* Selene Ramírez Fernández
+## Licencia
+* Sin licencia, uso educativo y gratuito.
+* Imagenes con licencia Creative Common.
+## Recursos adicionales:
 
-## About Laravel
-
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
-
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
-
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
-
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/)**
-- **[OP.GG](https://op.gg)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
+* Como instalar el proyecto y hacerlo funcionar:
+  
+1. Lo primero que debes tener en cuenta es que Laravel es un framework para PHP, por lo cual debes contar con un servidor web:
+   * Para Windows puedes usar WAMP O XAMPP
+   * Para Linux puedes usar LAMP
+    Recomiendo estos por que ya incluyen PHP y son completamente compatibles con la base de datos que usaremos.
+2. Recomiendo tener instalado un IDE(Entorno de desarrollo integrado):
+   * Visual Studio Code
+3. Ahora clonamos el repositorio en nuestro area de trabajo local
+   * dejo un enlace donde los explican paso por paso https://styde.net/clone-y-fork-con-git-y-github/
+4. Una vez hayamos clonado el repositorio de nuestro proyecto Laravel en local, debemos hacer los siguientes ajustes para que éste pueda correr en nuestro equipo.
+   * Instalar dependencias
+      - Instalaremos con Composer, el manejador de dependencias para PHP, Para ello abriremos una terminal en la carpeta del proyecto y ejecutaremos:
+        composer install
+   * Crear una base de datos
+     - El nombre que yo utilizé es tienda
+   * Crear el archivo .env
+      - Podemos duplicar el archivo .env.example, renombrarlo a .env e incluir los datos de conexión de la base de datos que indicamos en el paso anterior.
+   * Ejecutar migraciones
+      - ejecutamos las migraciones para que se generen las tablas con:
+           php artisan migrate
+    Ya tenemos nuestro proyecto listo para funcionar.
 
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+
+* [Link](https://github.com/SeleneRamirezF)
+  
