@@ -19,8 +19,9 @@ class ContactoController extends Controller
             'subject' => ['required', 'string', 'min:5', 'max:50'],
             'mensaje' => ['required', 'string', 'min:15', 'max:300']
         ]);
-        Mail::to(User::first())
-            ->send(new SendContactForm($request->subject, $request->mensaje));
+
+        Mail::to(User::first())->send(new SendContactForm($request->subject, $request->mensaje));
+
         return back()->with("mensaje", " enviado");
     }
 

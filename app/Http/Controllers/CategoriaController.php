@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Categoria;
-use Illuminate\Http\Request;
 use App\Http\Requests\Categoria\StoreRequest;
+use App\Models\Categoria;
 
 class CategoriaController extends Controller
 {
-    public function __construct(){
+    public function __construct()
+    {
         $this->middleware(
-            ['auth','verified'],
-            ['only'=>['edit', 'update', 'create', 'destroy', 'store' ]]
+            ['auth', 'verified'],
+            ['only' => ['edit', 'update', 'create', 'destroy', 'store']]
         );
     }
     /**
@@ -43,8 +43,12 @@ class CategoriaController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        Categoria::create($request->all());
-        return redirect()->route('categorias.index');
+        try {
+            Categoria::create($request->all());
+            return redirect()->route('categorias.index');
+        } catch (\Exception $ex) {
+            return redirect()->route('categorias.index')->with('error', 'No se ha podido crear la categoria: ' . $ex->getMessage());
+        }
     }
 
     /**
@@ -53,7 +57,8 @@ class CategoriaController extends Controller
      * @param  \App\Models\Categoria  $categoria
      * @return \Illuminate\Http\Response
      */
-    public function show(Categoria $categoria){}
+    public function show(Categoria $categoria)
+    {}
 
     /**
      * Show the form for editing the specified resource.
@@ -75,8 +80,12 @@ class CategoriaController extends Controller
      */
     public function update(StoreRequest $request, Categoria $categoria)
     {
-        $categoria->update($request->all());
-        return redirect()->route('categorias.index');
+        try {
+            $categoria->update($request->all());
+            return redirect()->route('categorias.index');
+        } catch (\Exception $ex) {
+            return redirect()->route('categorias.index')->with('error', 'No se ha podido actualizar la categoria: ' . $ex->getMessage());
+        }
     }
 
     /**
@@ -87,7 +96,11 @@ class CategoriaController extends Controller
      */
     public function destroy(Categoria $categoria)
     {
-        $categoria->delete();
-        return redirect()->route('categorias.index')->with('mensaje', 'Categoria borrada correctamente');
+        try {
+            $categoria->delete();
+            return redirect()->route('categorias.index')->with('mensaje', 'Categoria borrada correctamente');
+        } catch (\Exception $ex) {
+            return redirect()->route('categorias.index')->with('error', 'No se ha podido borrar la categoria: ' . $ex->getMessage());
+        }
     }
 }

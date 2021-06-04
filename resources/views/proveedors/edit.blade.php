@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{'Modificar Proveedor'}}
+            {{ 'Modificar Proveedor' }}
         </h2>
     </x-slot>
 
@@ -11,11 +11,11 @@
             @csrf
             @method("PUT")
             @bind($proveedor)
-            <x-form-input name="nombre" label="Nombre"/>
-            <x-form-input name="apellidos" label="Apellidos"/>
-            <x-form-input name="email" label="Email"/>
-            <x-form-input name="direccion" label="Dirección"/>
-            <x-form-input name="telefono" label="Teléfono"/>
+            <x-form-input name="nombre" label="Nombre" />
+            <x-form-input name="apellidos" label="Apellidos" />
+            <x-form-input name="email" label="Email" />
+            <x-form-input name="direccion" label="Dirección" />
+            <x-form-input name="telefono" label="Teléfono" />
 
             <div class="flex justify-end">
                 <x-form-submit>

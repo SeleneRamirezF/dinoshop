@@ -80,7 +80,11 @@ class DetallePedidoController extends Controller
      */
     public function destroy(DetallePedido $detallePedido)
     {
-        $detallePedido->delete();
-        return redirect()->route('pedidos.index')->with('mensaje', 'Detalles del pedido borrados correctamente');
+        try {
+            $detallePedido->delete();
+            return redirect()->route('pedidos.index')->with('mensaje', 'Detalles del pedido borrados correctamente');
+        } catch (\Exception $ex) {
+            return redirect()->route('pedidos.index')->with('error', 'No se han podido borrar los Detalles del pedido: ' . $ex->getMessage());
+        }
     }
 }

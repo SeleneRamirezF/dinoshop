@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Producto\StoreRequest;
+use App\Http\Requests\Producto\UpdateRequest;
 use App\Models\Categoria;
 use App\Models\Producto;
 use App\Models\Proveedor;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class ProductoController extends Controller
 {
@@ -52,12 +53,12 @@ class ProductoController extends Controller
         $producto->categoria_id = $datos['categoria_id'];
         $producto->proveedor_id = $datos['proveedor_id'];
 
-        if($request->has('imagen')){
-            $request->validate(['imagen'=>['image']]);
-            $ficheroSubido=$request->file('imagen');
-            $nombre = "img/productos/".uniqid()."_".$ficheroSubido->getClientOriginalName();
+        if ($request->has('imagen')) {
+            $request->validate(['imagen' => ['image']]);
+            $ficheroSubido = $request->file('imagen');
+            $nombre = "img/productos/" . uniqid() . "_" . $ficheroSubido->getClientOriginalName();
             Storage::Disk("public")->put($nombre, File::get($ficheroSubido));
-            $producto->imagen="storage/".$nombre;
+            $producto->imagen = "storage/" . $nombre;
         }
 
         try {
@@ -80,7 +81,7 @@ class ProductoController extends Controller
         return view('productos.edit', compact('producto', 'categorias', 'proveedors'));
     }
 
-    public function update(StoreRequest $request, Producto $producto)
+    public function update(UpdateRequest $request, Producto $producto)
     {
         $datos = $request->validated();
         $producto->nombre = $datos['nombre'];
@@ -108,7 +109,11 @@ class ProductoController extends Controller
 
     public function destroy(Producto $producto)
     {
-        $producto->delete();
-        return redirect()->route('productos.index')->with('mensaje', 'Producto borrado correctamente');
+        try {
+            $producto->delete();
+            return redirect()->route('productos.index')->with('mensaje', 'Producto borrado correctamente');
+        } catch (\Exception $ex) {
+            return redirect()->route('productos.index')->with('error', 'No se han podido borrar el producto: ' . $ex->getMessage());
+        }
     }
 }

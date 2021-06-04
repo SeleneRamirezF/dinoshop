@@ -15,7 +15,6 @@
         <div class="min-h-full mt-3 flex items-center px-2">
             <div class='overflow-x-auto w-full'>
 
-                <!-- Table -->
                 <table
                     class='mx-auto max-w-4xl w-full whitespace-nowrap rounded-lg bg-white divide-y divide-gray-300 overflow-hidden'>
                     <thead class="bg-gray-50">
@@ -47,7 +46,7 @@
                                 </td>
                                 <td class="px-6 py-4 text-center">
                                     <p class="text-gray-500 text-sm font-semibold tracking-wide">
-                                        {{ $item->proveedor_id }}
+                                        {{ $item->proveedor->nombre }}
                                     </p>
                                 </td>
                                 <td class="px-6 py-4 text-center">
@@ -61,18 +60,10 @@
                                     </p>
                                 </td>
                                 <td class="px-6 py-4 text-center">
-                                    <form action="{{ route('pedidos.destroy', $item) }}" method="POST">
-                                        @csrf
-                                        @method("DELETE")
-                                        <a href="{{ route('pedidos.show', $item) }}"
-                                            class="text-purple-800 hover:underline px-1">
-                                            <i class="fa fa-info"></i>
-                                        </a>
-                                        <button type="submit" class="text-purple-800 hover:underline px-1"
-                                            onclick="return confirm('¿Seguro que desea Borrar la pedido: {{ $item->id }} ?')">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </form>
+                                    <a href="{{ route('pedidos.show', $item) }}"
+                                        class="text-purple-800 hover:underline px-1">
+                                        <i class="fa fa-info"></i>
+                                    </a>
                                 </td>
                             </tr>
                         @endforeach
@@ -81,47 +72,6 @@
 
             </div>
         </div>
-
-        {{-- <div class="text-center grid grid-cols-6 py-2 gap-2 mt-10 border-2 border-blue-200 shadow text-xm">
-            <div class="font-bold text-gray-700">Detalle</div>
-            <div class="font-bold text-gray-700">ID</div>
-            <div class="font-bold text-gray-700">Proveedor</div>
-            <div class="font-bold text-gray-700">Usuario</div>
-            <div class="font-bold text-gray-700">Estado</div>
-            <div class="font-bold text-gray-700">Acciones</div>
-        </div>
-        <div class="text-center grid grid-cols-6 py-2 gap-2 mt-10 border-2 border-blue-200 shadow py-5 text-xs">
-            @foreach ($pedidos as $item)
-            <div class="mb-5">
-                <a href="{{route('pedidos.show', $item)}}"
-                    class="bg-purple-400 hover:bg-green-200 rounded text-white font-bold py-2 px-4 shadow">
-                    <i class="fa fa-info"></i> Detalle</a>
-            </div>
-            <div>
-                {{$item->id}}
-            </div>
-            <div>
-                {{$item->proveedor_id}}
-            </div>
-            <div>
-                {{$item->user->name}}
-            </div>
-            <div>
-                {{$item->estado}}
-            </div>
-            <div>
-                <form action="{{route('pedidos.destroy', $item)}}" method="POST">
-                    @csrf
-                    @method("DELETE")
-                    <button type="submit"
-                        class="my-1 mx-1 bg-yellow-700 hover:bg-yellow-800 rounded text-white font-bold py-2 px-4 shadow"
-                        onclick="return confirm('¿Seguro que desea Borrar la pedido: {{ $item->id }} ?')">
-                        <i class="fas fa-trash"></i> Borrar
-                    </button>
-                </form>
-            </div>
-            @endforeach
-        </div> --}}
         <div class="mt-4">
             {{ $pedidos->links() }}
         </div>

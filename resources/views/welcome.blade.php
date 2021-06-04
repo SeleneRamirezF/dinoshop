@@ -430,7 +430,7 @@
                                         @auth
                                             <a href="{{ url('/dashboard') }}"
                                                 class="text-sm text-gray-700 underline">Tablero</a>
-                                    @else
+                                        @else
                                             <a href="{{ route('login') }}" class="text-sm text-gray-700 underline">Iniciar
                                                 sesión</a>
 
@@ -452,8 +452,18 @@
             <div class="flex justify-center mt-4 sm:items-center sm:justify-between">
                 <div class="text-center text-sm text-gray-500 sm:text-left">
                     <div class="flex items-center">
-                        Creador: Selene Ramírez Fernández 2021
+                        Creador: Selene Ramírez Fernández
+                        Curso: 2ºDAW - 2020/21 <br />
                     </div>
+                    <a href="selene.rf@hotmail.com">
+                       selene.rf@hotmail.com
+                    </a>
+                    <div class="copyright">
+                        Todas las fotos usadas de
+                        <a href='https://www.freepik.es'>www.freepik.es</a>
+                        bajo Licencias Creative Commons
+                    </div>
+                    <img src="{{ url('storage/img/by.png') }}" class="w-auto h-5 object-cover rounded-full" />
                 </div>
 
                 <div class="ml-4 text-center text-sm text-gray-500 sm:text-right sm:ml-0">

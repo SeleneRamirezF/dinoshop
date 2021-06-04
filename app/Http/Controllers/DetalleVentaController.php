@@ -80,8 +80,11 @@ class DetalleVentaController extends Controller
      */
     public function destroy(DetalleVenta $detalleVenta)
     {
-
-        $detalleVenta->delete();
-        return redirect()->route('ventas.index')->with('mensaje', 'Detalles de la venta borrados correctamente');
+        try {
+            $detalleVenta->delete();
+            return redirect()->route('ventas.index')->with('mensaje', 'Detalles de la venta borrados correctamente');
+        } catch (\Exception $ex) {
+            return redirect()->route('ventas.index')->with('error', 'No se han podido borrar los Detalles de la venta: ' . $ex->getMessage());
+        }
     }
 }

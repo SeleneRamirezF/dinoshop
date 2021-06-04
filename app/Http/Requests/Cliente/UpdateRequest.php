@@ -3,12 +3,27 @@
 namespace App\Http\Requests\Cliente;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 class UpdateRequest extends FormRequest
 {
     public function authorize()
     {
         return true;
+    }
+
+    public function prepareForValidation(){
+        // tratamos el fichero
+        //si hemos subido fichero
+        if(is_uploaded_file($this->imagen)){
+            //nombre unico
+            $nombreI='img/clientes'.uniqid()."_".$this->imagen->getClientOriginalName();
+            //lo guardamos en la carpeta que queremos
+            Storage::disk('public')->put($nombreI, File::get($this->imagen));
+            //creamos un campo nuevo en el request con el nombre del fichero
+            $this->merge(['nombre_imagen'=>"storage/$nombreI"]);
+        }
     }
 
     public function rules()
@@ -19,6 +34,9 @@ class UpdateRequest extends FormRequest
             'direccion' => 'nullable|string|max:255',
             'telefono' => 'nullable|string|unique:clientes,telefono,'.$this->route('cliente')->id.'|min:9|max:9',
             'email' => 'nullable|string|unique:clientes,email,'.$this->route('cliente')->id.'|max:255|email:rfc,dns',
+            'imagen' => 'nullable|image',
+            'nombre_imagen'=> 'nullable'
+
         ];
     }
     public function messages()
@@ -45,7 +63,9 @@ class UpdateRequest extends FormRequest
             'email.string' => 'El valor tiene que ser una cadena de caracteres',
             'email.unique' => 'Este email ya esta registrado',
             'email.max' => 'El máximo de caracteres es 255',
-            'email.email' => 'Este campo tiene que tener formato de email'
+            'email.email' => 'Este campo tiene que tener formato de email',
+
+            'imagen.require'=>"El fichero bede ser un fichero de imagen",
 
         ];
     }

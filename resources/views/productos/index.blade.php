@@ -8,7 +8,7 @@
     <div class="container mt-3 mx-auto p-2 w-5/6 ">
         <x-mensajes-alertas />
 
-        @if(Auth::user()->id == 1 )
+        @if (Auth::user()->id == 1)
             <div>
                 <a href="{{ route('productos.create') }}"
                     class="bg-green-600 hover:bg-green-800 rounded text-white font-bold py-2 px-4 shadow">
@@ -60,12 +60,9 @@
             </form>
         </div>
 
-        {{-- prueba tabla --}}
-
         <div class="min-h-full mt-3 flex items-center px-2">
             <div class='overflow-x-auto w-full'>
 
-                <!-- Table -->
                 <table
                     class='mx-auto max-w-4xl w-full whitespace-nowrap rounded-lg bg-white divide-y divide-gray-300 overflow-hidden'>
                     <thead class="bg-gray-50">
@@ -135,7 +132,7 @@
                                             class="text-purple-800 hover:underline px-1">
                                             <i class="fa fa-info"></i>
                                         </a>
-                                        @if(Auth::user()->id == 1 )
+                                        @if (Auth::user()->id == 1)
                                             <a href="{{ route('productos.edit', $item) }}"
                                                 class="text-purple-800 hover:underline px-1">
                                                 <i class="fa fa-edit"></i>

@@ -2,17 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Proveedor;
-use Illuminate\Http\Request;
 use App\Http\Requests\Proveedor\StoreRequest;
 use App\Http\Requests\Proveedor\UpdateRequest;
+use App\Models\Proveedor;
+use Illuminate\Http\Request;
 
 class ProveedorController extends Controller
 {
-    public function __construct(){
+    public function __construct()
+    {
         $this->middleware(
-            ['auth','verified'],
-            ['only'=>['edit', 'update', 'create', 'destroy', 'store' ]]
+            ['auth', 'verified'],
+            ['only' => ['edit', 'update', 'create', 'destroy', 'store']]
         );
     }
     /**
@@ -44,8 +45,12 @@ class ProveedorController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        Proveedor::create($request->all());
-        return redirect()->route('proveedors.index');
+        try {
+            Proveedor::create($request->all());
+            return redirect()->route('proveedors.index');
+        } catch (\Exception $ex) {
+            return redirect()->route('proveedors.index')->with('error', 'No se han podido crear el proveedor: ' . $ex->getMessage());
+        }
     }
 
     /**
@@ -54,7 +59,8 @@ class ProveedorController extends Controller
      * @param  \App\Models\Proveedor  $proveedor
      * @return \Illuminate\Http\Response
      */
-    public function show(Proveedor $proveedor){}
+    public function show(Proveedor $proveedor)
+    {}
 
     /**
      * Show the form for editing the specified resource.
@@ -76,8 +82,12 @@ class ProveedorController extends Controller
      */
     public function update(UpdateRequest $request, Proveedor $proveedor)
     {
-        $proveedor->update($request->all());
-        return redirect()->route('proveedors.index');
+        try {
+            $proveedor->update($request->all());
+            return redirect()->route('proveedors.index');
+        } catch (\Exception $ex) {
+            return redirect()->route('proveedors.index')->with('error', 'No se han podido actualizar el proveedor: ' . $ex->getMessage());
+        }
     }
 
     /**
@@ -88,7 +98,11 @@ class ProveedorController extends Controller
      */
     public function destroy(Proveedor $proveedor)
     {
-        $proveedor->delete();
-        return redirect()->route('proveedors.index')->with('mensaje', 'Proveedor borrado correctamente');
+        try {
+            $proveedor->delete();
+            return redirect()->route('proveedors.index')->with('mensaje', 'Proveedor borrado correctamente');
+        } catch (\Exception $ex) {
+            return redirect()->route('proveedors.index')->with('error', 'No se han podido borrar el proveedor: ' . $ex->getMessage());
+        }
     }
 }

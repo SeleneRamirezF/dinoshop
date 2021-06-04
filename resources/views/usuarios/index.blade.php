@@ -9,8 +9,7 @@
         <x-mensajes-alertas />
         <div class="min-h-full mt-3 flex items-center px-2">
             <div class='overflow-x-auto w-full'>
-                <!-- Table -->
-                {{-- name', 'email', 'password', --}}
+
                 <table
                     class='mx-auto max-w-4xl w-full whitespace-nowrap rounded-lg bg-white divide-y divide-gray-300 overflow-hidden'>
                     <thead class="bg-gray-50">
@@ -43,10 +42,6 @@
                                     <form action="{{ route('usuarios.destroy', $item) }}" method="POST">
                                         @csrf
                                         @method("DELETE")
-                                        <a href="{{ route('usuarios.edit', $item) }}"
-                                            class="text-purple-800 hover:underline px-1">
-                                            <i class="fa fa-edit"></i>
-                                        </a>
                                         <button type="submit" class="text-purple-800 hover:underline px-1"
                                             onclick="return confirm('¿Seguro que desea Borrar el usuario: {{ $item->name }} ?')">
                                             <i class="fas fa-trash"></i>
@@ -58,9 +53,6 @@
                     </tbody>
                 </table>
             </div>
-        </div>
-        <div class="mt-4">
-            {{-- {{ $usuarios->links() }} --}}
         </div>
     </div>
 

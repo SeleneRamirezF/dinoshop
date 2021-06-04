@@ -91,8 +91,6 @@
                     <div class="ml-24 md:w-1/2">
                         <p class=" text-4xl font-bold">Tenemos muchos artículos chulisimos!</p>
                         <p class="text-2xl mb-10 leading-none">Para todos los amantes de los dinosaurios</p>
-                        {{-- <a href="{{ route('productos.index') }}" class="bg-purple-800 py-4 px-8 text-white font-bold uppercase
-                        text-xs rounded hover:bg-gray-200 hover:text-gray-800">Conoce nuestros productos</a> --}}
                     </div>
                 </div>
             </div>
@@ -109,9 +107,6 @@
                     <div class="ml-24 md:w-1/2">
                         <p class=" font-bold text-sm uppercase text-white">Especialistas el artículas jurásicos</p>
                         <p class=" text-4xl mb-10 font-bold text-white">GRRRRR!</p>
-                        {{-- <p class="text-2xl mb-10 leading-none">Para todos los amantes de los dinosaurios</p> --}}
-                        {{-- <a href="{{ route('ventas.create') }}" class="bg-purple-800 py-4 px-8 text-white font-bold uppercase text-xs
-                        rounded hover:bg-gray-200 hover:text-gray-800">Empieza a comprar</a> --}}
                     </div>
                 </div>
             </div>

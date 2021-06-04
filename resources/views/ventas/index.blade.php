@@ -10,7 +10,7 @@
 
         @if (Auth::user()->id != 1)
             <p class=" text-4xl font-bold mt-3">GRACIAS POR TU COMPRA</p>
-            <br/>
+            <br />
             <a href="{{ url('/dashboard') }}"
                 class="bg-green-600 hover:bg-green-800 rounded text-white font-bold py-2 px-4 shadow mt-3 mr-2">
                 <i class="fas fa-cart-plus"> </i> Volver a inicio
@@ -67,22 +67,14 @@
                                         </p>
                                     </td>
                                     <td class="px-6 py-4 text-center">
-                                        <form action="{{ route('ventas.destroy', $item) }}" method="POST">
-                                            @csrf
-                                            @method("DELETE")
-                                            <a href="{{ route('ventas.show', $item) }}"
-                                                class="text-purple-800 hover:underline px-1">
-                                                <i class="fa fa-info"></i>
-                                            </a>
-                                            <a href="{{ route('productos.edit', $item) }}"
-                                                class="text-purple-800 hover:underline px-1">
-                                                <i class="fa fa-edit"></i>
-                                            </a>
-                                            <button type="submit" class="text-purple-800 hover:underline"
-                                                onclick="return confirm('¿Seguro que desea Borrar la pedido: {{ $item->id }} ?')">
-                                                <i class="fas fa-trash"></i>
-                                            </button>
-                                        </form>
+                                        <a href="{{ route('ventas.show', $item) }}"
+                                            class="text-purple-800 hover:underline px-1">
+                                            <i class="fa fa-info"></i>
+                                        </a>
+                                        <a href="{{ route('productos.edit', $item) }}"
+                                            class="text-purple-800 hover:underline px-1">
+                                            <i class="fa fa-edit"></i>
+                                        </a>
                                     </td>
                                 </tr>
                             @endforeach

@@ -17,18 +17,6 @@ let subtotal = [];
 
 function agregar() {
 
-    // console.log($("#agregar").data("producto"));
-    // console.log($("#agregar").data("nombre"));
-    // console.log($("#agregar").data("pvp"));
-    // console.log($("#cantidad").val());
-
-    //--------------------------------------------------------------
-
-    // product_id = $("#agregar").data("producto");
-    // producto = $("#agregar").data("nombre");
-    // quantity = $("#cantidad").val();
-    // price = $("#agregar").data("pvp");
-
     product_id = $("#producto_id").find(":selected").val();
     producto = $("#producto_id option:selected").text();
     quantity = $("#cantidad").val();
@@ -49,8 +37,8 @@ function agregar() {
 }
 
 function limpiar() {
-    // $("#quantity").val("");
-    // $("#price").val("");
+    $("#quantity").val("");
+    $("#price").val("");
 
 }
 

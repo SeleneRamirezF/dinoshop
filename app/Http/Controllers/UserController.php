@@ -96,6 +96,7 @@ class UserController extends Controller
             }
             $usuarios->delete();
             return redirect()->route('usuarios.index')->with('mensaje', 'Usuario borrado correctamente');
+
         } catch (\Exception $ex) {
             return redirect()->route('usuarios.index')->with('error', 'No se ha podido borrar el usuario: ' . $ex->getMessage());
         }

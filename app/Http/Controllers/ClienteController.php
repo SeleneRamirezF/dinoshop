@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cliente;
-use Illuminate\Http\Request;
 use App\Http\Requests\Cliente\StoreRequest;
 use App\Http\Requests\Cliente\UpdateRequest;
 use Illuminate\Support\Facades\Storage;
@@ -111,9 +110,12 @@ class ClienteController extends Controller
         $cliente->email=$datos['email'];
 
         if(isset($datos['nombre_imagen'])){
-            if(basename($cliente->imagen)!='default.png') unlink($cliente->imagen);
-            $cliente->imagen=$datos['nombre_imagen'];
+            if(basename($cliente->imagen) != 'default.png'){
+                unlink($cliente->imagen);
+            }
+            $cliente->imagen = $datos['nombre_imagen'];
         }
+
         try {
             $cliente->update();
             return redirect()->route('clientes.index');
