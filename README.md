@@ -1,4 +1,6 @@
-# DinoShop.es
+<p align="center"><a href="https://DinoShop.es" target="_blank"><img src="'https://github.com/SeleneRamirezF/dinoshop/storage/img/logotipo.svg" width="400"></a></p>
+
+## DinoShop.es
 Esta web ha sido creada como Proyecto Integrado de fin de curso del Ciclo Superior de Desarrollo de Aplicaciones Web (DAW).  
 
 ## Título del Proyecto
