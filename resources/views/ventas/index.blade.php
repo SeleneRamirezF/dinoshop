@@ -71,10 +71,6 @@
                                             class="text-purple-800 hover:underline px-1">
                                             <i class="fa fa-info"></i>
                                         </a>
-                                        <a href="{{ route('productos.edit', $item) }}"
-                                            class="text-purple-800 hover:underline px-1">
-                                            <i class="fa fa-edit"></i>
-                                        </a>
                                     </td>
                                 </tr>
                             @endforeach
